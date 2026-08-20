@@ -67,20 +67,26 @@ ambulance." Always "the app is designed to listen in the ambulance."
 
 Frank / Daniel: assign every item. No blanks at presentation time.
 
-| # | Capability | Tier | Evidence (file:line or test) |
+| # | Capability | Tier | Evidence (file / test) |
 |---|---|---|---|
-| 1 | Audio in → transcript | `[MEASURE]` | |
-| 2 | Transcript → Corti fact extraction | `[MEASURE]` | |
-| 3 | Facts → guideline retrieval (RAG) | `[MEASURE]` | |
-| 4 | Retrieval → covering / not-covered verdict | `[MEASURE]` | |
-| 5 | Verdict → medication / dose surfacing | `[MEASURE]` | |
-| 6 | Allergy / interaction check against history | `[MEASURE]` | |
-| 7 | Event log with timestamps | `[MEASURE]` | |
-| 8 | Pre-arrival brief generated for hospital | `[MEASURE]` | |
-| 9 | CPR timing / audible prompts | `[MEASURE]` | |
-| 10 | EHR background pull | `[MEASURE]` | |
-| 11 | CPR-number keyed patient identity | `[MEASURE]` | |
-| 12 | Human-in-the-loop confirm step | `[MEASURE]` | |
+| 1 | Audio in → transcript | **T2\*** | `pcmRecorder.ts` (AudioWorklet 16 kHz), `transcribe-batch`, `ambient-session` |
+| 2 | Transcript → Corti fact extraction | **T2\*** | `ambient-safety` two-agent pass; `facts.test.ts` covers the parse |
+| 3 | Facts → guideline retrieval (RAG) | **T2\*** | `guideline-router` (agent, fail-open), `rag-search` (pgvector) |
+| 4 | Retrieval → covering / not-covered verdict | **T2\*** | `rag-gate` agent — a gate, not a threshold (`viden/11` §H16) |
+| 5 | Verdict → medication / dose surfacing | **T1** local / T2\* agent | `akutBarn/lookup.test.ts`, `labels.test.ts` — tables are local |
+| 6 | Allergy / interaction check against history | **T1** | `alarms/rules.ts` — **no model call**; `rules.test.ts` |
+| 7 | Event log with timestamps | **T1** | `ambient/eventLogFile.test.ts`; spoken-time stamps (`d948b9f`) |
+| 8 | Pre-arrival brief generated for hospital | **T1** QR / T2\* note | `qr/cp437.test.ts` — client-side, works offline; note via `/v2/documents/` |
+| 9 | CPR timing / audible prompts | **T3 — ABSENT** | only `tts/speak.ts` for spoken alarms. **No metronome or compression timing exists.** Do not imply it |
+| 10 | EHR background pull | **T3** | absent; blocked by data access, not architecture (`09_…` §7) |
+| 11 | CPR-number keyed patient identity | **T3 — INVERTED** | the build **removes** CPR: `pattern-net` emits `[CPR-FJERNET]`, fail-closed. We do not key on identity, we strip it |
+| 12 | Human-in-the-loop confirm step | **T1** | `CriticalAlertModal` overlays until acknowledged; dismissing reveals the next finding |
+
+**\*** T2 here means *code-evidenced and deployed, but no live Corti call was observed from the verification side* (no `.env.corti`). Frank can promote these to T1 by running them once — that single run is the whole gap. See `context/14_…` §6.
+
+**T1 count: five rows (5 local, 6, 7, 8-QR, 12).** The rule below is satisfied.
+
+Note the shape of it: rows 6, 7 and 12 execute **without Corti and without a network**. That is not a weakness to hide — it is exactly why the demo survives the hall wifi dying.
 
 **Rule:** if fewer than four rows are T1, we do not have a demo, we have
 a slide deck. Cut scope and make four rows real.

@@ -818,7 +818,7 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
     ], cutEl:'s05' }
   };
 
-  var prof='wide', idx=-1, t0=0, segT0=0, ticking=false, actuals=[], raf=null;
+  var prof='wide', idx=-1, t0=0, segT0=0, pausedAt=0, ticking=false, actuals=[], raf=null;
 
   function live(){ return PROFILES[prof].beats; }
   function cutEl(){ return PROFILES[prof].cutEl||null; }
@@ -964,10 +964,17 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
   stageBtn.onclick=function(){setMode('stage');};
   xt.onclick=function(){setXray(xr.hidden);};
   $('tStart').onclick=function(){
-    if(ticking){ ticking=false; cancelAnimationFrame(raf); $('tStart').textContent='Resume'; }
-    else if(idx>=0){ var p=performance.now()-segT0; ticking=true; segT0=performance.now();
-      t0+=0; $('tStart').textContent='Pause'; raf=requestAnimationFrame(tick); }
-    else startRun();
+    if(ticking){
+      ticking=false; pausedAt=performance.now();
+      cancelAnimationFrame(raf); $('tStart').textContent='Resume';
+    } else if(idx>=0){
+      // shift both clocks forward by the paused duration, so a pause costs
+      // neither the beat nor the total. Getting this wrong makes the whole
+      // instrument lie, and the timings are the only thing it is for.
+      var gap=performance.now()-pausedAt;
+      t0+=gap; segT0+=gap;
+      ticking=true; $('tStart').textContent='Pause'; raf=requestAnimationFrame(tick);
+    } else startRun();
   };
   $('tNext').onclick=nextBeat;
   $('tReset').onclick=resetRun;
