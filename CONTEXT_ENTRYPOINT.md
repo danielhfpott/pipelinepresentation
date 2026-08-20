@@ -22,19 +22,36 @@ Read these in order before making large conclusions:
 
 1. `context/00_READ_ME_FIRST.md`
 2. `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
-3. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
-4. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-5. `context/03_LIVING_SYNTHESIS.md`
-6. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
-7. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
-8. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
-9. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
-10. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
-11. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
-12. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
-13. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
+3. `context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md`
+4. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
+5. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
+6. `context/03_LIVING_SYNTHESIS.md`
+7. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
+8. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
+9. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
+10. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
+11. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
+12. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
+13. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
+14. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
 
 Then inspect the exact code/runtime evidence needed for the task.
+
+## Why the current-chat reconstruction is high priority
+
+`context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md` captures the current thread’s combined contribution to:
+
+- night-run purpose/mechanics;
+- GitHub-as-shared-memory rules;
+- branch/context-drift prevention;
+- assistant execution truth auditing;
+- phone-first live presentation actualization;
+- functionality-neutral phone mirroring/control;
+- persistent live phone state across scene switches;
+- presentation-only X-ray/detail overlays;
+- the distinction between project truth and later judging/rubric optimization.
+
+It is a forensic reconstruction, **not** a claimed byte-for-byte transcript, and must remain subordinate to stronger code/runtime/clinical evidence when conflicts appear.
 
 ## Truth rule
 
