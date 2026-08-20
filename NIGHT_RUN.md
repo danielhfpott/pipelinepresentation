@@ -12,6 +12,8 @@ Therefore this file defines what **one iteration** means.
 
 The night run does **not** invent the project pipeline. It optimizes, verifies, repairs, and strengthens an already-created and explicitly frozen pipeline baseline.
 
+A second purpose is equally important: every iteration must leave behind a more useful **compressed understanding of the whole current project** in `.nightrun/STATE.md`. The run is therefore not only an implementation loop; it is an implementation + evidence + synthesis loop.
+
 ---
 
 ## 0. Activation gate — read first
@@ -59,9 +61,11 @@ Perform the following sequence once, then stop.
 
 Read `.nightrun/STATE.md` first.
 
+Treat it as the **current compressed project model**, not merely a log entry. It should tell you where the last iteration left the project, what is known, what remains uncertain, and which improvement frontier currently matters most.
+
 Inspect the current git status and recent commits.
 
-Read only the source/context/code necessary to understand the current highest-priority item. Do not re-derive the entire project from scratch each iteration.
+Read only the source/context/code necessary to understand the current highest-priority item. Do not re-derive the entire project from scratch each iteration unless the state itself identifies a contradiction requiring broader reconciliation.
 
 ### Step B — choose exactly one highest-value presentation-critical target
 
@@ -121,23 +125,52 @@ Reading code is not equivalent to proving it runs.
 
 If verification fails, record the failure plainly. Never make failure look like success.
 
-### Step F — update durable state
+### Step F — re-synthesize durable state
 
-Update `.nightrun/STATE.md` with:
+Update `.nightrun/STATE.md` after the bounded work.
 
-- iteration number;
-- timestamp;
-- baseline commit inspected;
-- target selected;
+This is **not just a last-action log**. Rewrite/update it so it becomes the best concise, evidence-grounded representation of the project **after this iteration**.
+
+Preserve both:
+
+1. **iteration delta** — what this iteration specifically attempted, changed, verified, failed, or learned; and
+2. **cumulative synthesis** — what the total project/presentation state now appears to be when the new evidence is integrated with everything already known.
+
+At minimum the state should maintain:
+
+- machine-readable blocker status;
+- iteration number and timestamp;
+- exact baseline/current commit context;
+- the currently frozen pipeline/demo spine;
+- latest bounded target and result;
 - commands/tests actually run;
-- result;
 - files changed;
-- evidence produced;
-- current best demo path impact;
-- remaining highest-priority item;
-- blocker status.
+- evidence produced, preferably with inspectable path/test/commit references;
+- current capability truth map: RUNNING / BUILT / PARTIAL / DESIGNED / EXTERNAL / UNKNOWN;
+- current Corti judging/API coverage, including which required product areas are actually evidenced;
+- best known five-minute live-demo path, in execution order;
+- fallback/backup path if the live path fails;
+- presentation-safe claims;
+- claims that must not be made yet;
+- unresolved contradictions / uncertainty that could change the story;
+- regression or demo risks introduced/discovered;
+- highest-value remaining optimization frontier;
+- exact next recommended bounded iteration;
+- any human/team decision required.
 
-Keep the state concise enough to read first thing in the morning.
+### The all-encompassing-state rule
+
+`STATE.md` should function as an **icing layer over the cake**, in the following precise sense:
+
+- the code/runtime/evidence remain the underlying cake and stay authoritative;
+- the state integrates those layers into one compact current understanding;
+- the next agent iteration can reason from that synthesis instead of reconstructing context from terminal history;
+- the morning team can understand the strongest current project and presentation shape without reading every overnight log;
+- new evidence may revise the synthesis, but the synthesis must never overwrite or outrank contrary evidence.
+
+The state should become **more informative, not merely longer**. Remove stale interpretations by correcting them in place; preserve important contradictions explicitly; do not accumulate 300 repetitive mini-reports.
+
+Do not place an unevidenced conclusion in the state as fact merely because it helps the pitch. If inference is useful but not proven, mark it as inference/uncertain.
 
 ### Step G — commit exactly the verified iteration
 
@@ -213,6 +246,8 @@ The final judging source currently says:
 
 An iteration should prefer work that strengthens one or more of these criteria **without distorting the project**.
 
+The state should make rubric coverage visible so overnight optimization can target the **weakest evidence-backed judging dimension**, not merely whatever code area is easiest to change.
+
 ---
 
 ## 7. Clinical-content boundary
@@ -255,16 +290,22 @@ Do not spend multiple iterations generating internal prose that does not improve
 By morning, `.nightrun/STATE.md` should let the team immediately understand:
 
 - what baseline was optimized;
-- what was actually run;
+- what the actual project pipeline currently is;
+- what was actually run overnight;
 - what changed;
 - what now works;
 - what still fails;
+- what the latest evidence changed about the understanding of the project;
 - what is safe to claim;
 - what must remain DESIGNED / PARTIAL / EXTERNAL;
 - which Corti product areas are demonstrably used;
+- how the project currently maps against the judging criteria;
 - the best known live-demo path;
 - the best available fallback/backup evidence;
+- the single highest-value remaining optimization frontier;
 - the next human action before submission.
+
+The morning handoff should therefore be both **operational** and **interpretive**: what happened, and what it now means for the final presentation.
 
 ---
 
