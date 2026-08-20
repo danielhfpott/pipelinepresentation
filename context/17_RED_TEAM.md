@@ -56,14 +56,53 @@ The spine already degrades in the right order: `15_…` §5 says keep "it can st
 
 ---
 
-## 3. Medical coding — closed, drop it
+## 3. Medical coding — REOPENED, and it is small
 
-Doc `14_…` §3 flagged that coverage sits at exactly 4 of 5. **That question is now resolved as a non-action**, on two independent grounds:
+**An earlier draft of this section closed medical coding as a non-action on the grounds that it was probably unreachable. That reasoning was wrong, and it was wrong because it relayed a claim instead of checking the source.**
 
-1. **It may not be reachable.** Corti's documentation reportedly states the coding endpoint is available per-customer and requires customer-specific tuning. A hackathon tenant probably cannot call it. *(Relayed claim — worth 60 seconds with an on-site Corti engineer, not worth an implementation attempt.)*
-2. **Even if reachable, it costs demo time you do not have** (§2), to satisfy a minimum already met.
+The "per-customer, requires customer-specific tuning" wording applies to the **legacy interaction-based Codes endpoints**. The current API is a separate, stateless surface. Verified directly against `docs.corti.ai`:
 
-**Revised recommendation: present four areas confidently. Do not build the fifth.** If a judge raises it, the answer is that coding is a per-customer tuned capability outside a hackathon tenant's reach — which demonstrates knowing the platform rather than a gap.
+| | Verified |
+|---|---|
+| Endpoint | `POST https://api.${ENVIRONMENT}.corti.app/v2/tools/coding/` |
+| Access-restriction wording | **none** — no limited-access, private-preview, or per-customer-tuning note on either the API reference or the quickstart |
+| Auth | `Authorization: Bearer ${TOKEN}` + `Tenant-Name: ${TENANT}` + `Content-Type: application/json` |
+| Prerequisites | a Corti Console account, and API-client `tenant` / `clientId` / `clientSecret` |
+| Body | `{"system": ["…"], "context": [{"type": "text", "text": "…"}]}` |
+
+**Those prerequisites are exactly the contents of Frank's existing `.env.corti`.** Nothing additional is required.
+
+### It is roughly one edge function
+
+`supabase/functions/_shared/corti-auth.ts` already exports:
+
+```ts
+export function cortiHeaders(token: string): Record<string, string> {
+  return {
+    Authorization: `Bearer ${token}`,
+    "Tenant-Name": Deno.env.get("CORTI_TENANT_NAME")!,
+  };
+}
+```
+
+That is precisely the header pair the coding endpoint requires, with the token already OAuth-cached at module level. A `predict-codes` function calling `${cortiApiBase()}/v2/tools/coding/` with `cortiHeaders(token)` and the finished note text would mirror the existing thirteen functions almost exactly.
+
+### Correction to `17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md` §3.6
+
+That document lists "Danish SKS/ICD-10-DK" among supported systems. **The API reference does not list ICD-10-DK.** Danish support appears as **SNOMED CT-DK**. Anything said on stage about Danish coding should use SNOMED CT-DK unless someone finds ICD-10-DK documented elsewhere.
+
+### Revised recommendation
+
+**The availability objection is gone. The demo-time objection is not — but it no longer applies, because this does not need to be a demo beat.**
+
+The note already exists by beat 4. Coding it costs **no additional stage time** if the codes simply appear on the note, or are mentioned in one clause at the close. That captures the fifth product area without touching the 180-second demo budget.
+
+Judgement, stated plainly:
+
+- **4 of 5 already meets the stated minimum.** Nothing here is required.
+- The remaining cost is Frank's implementation time and one live test against the tenant — **whether the hackathon tenant is entitled is an environment fact to test, not something to infer in either direction.**
+- If that test passes, this is the cheapest remaining rubric gain available, and it also removes the coverage-collapse risk entirely.
+- **If it fails, abandon it immediately.** It must not become a debugging session on submission morning.
 
 This supersedes `14_…` §3 and `15_…` §10 item 1.
 
