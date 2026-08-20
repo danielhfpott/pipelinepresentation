@@ -89,7 +89,11 @@ Rule 1 fires on a **planned** drug, not only an administered one — so the warn
 Three claims, each defensible, in descending order of strength:
 
 1. **It can stay silent.** `viden/17` calls the negative control the strongest and least-shown result: 96–100% correct refusal versus 63% for search. *"An incorrect guideline suggestion is more dangerous than none."* If beat time exists, **show** it; if not, say it.
-2. **It watches for what is missing**, not only what is wrong. `FindingCategory` is `"keyword" | "contradiction" | "missing"` — the *missing* tier is the clinician's own retrospective question, *did I do everything I reasonably could?*, encoded as a rule.
+2. **It watches for what is missing**, not only what is wrong. `FindingCategory` is `"keyword" | "contradiction" | "missing"`.
+
+   > **Say exactly this: "The rule engine checks for what's missing, not just what's wrong."**
+   >
+   > **Corrected — see `17_RED_TEAM.md` §5.** An earlier draft framed the *missing* tier as doc `03_…` §6's *"did I do everything I reasonably could?"* encoded as a rule. That is a claim about **intent**, and it is probably false: Frank most likely built the omission check independently, as ordinary documentation practice. Keep the doctrine connection in the context documents as reconciliation; keep it off the stage. The sentence above is true either way and lands harder.
 3. **Two languages, two different retrieval architectures**, chosen deliberately by corpus shape — many small Danish instructions means an agent picks the document *for* you; one large English guideline means you search *inside* it.
 
 If the 45 seconds must shrink, keep #1 and drop #3.
