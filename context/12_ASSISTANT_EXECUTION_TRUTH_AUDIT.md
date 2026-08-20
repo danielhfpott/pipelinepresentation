@@ -273,6 +273,36 @@ This is a major prerequisite for baseline freeze/night-run activation.
 
 ---
 
+## 20. Root agent routers / stale-branch context-drift guard
+
+**Commitment:** prevent simultaneous Claude Code/Codex sessions from silently reasoning from stale `main` while newer project truth exists on `presentation-context-20260820`.
+
+**Status: DONE AS REPOSITORY INFRASTRUCTURE; LOCAL CHECKOUT STILL REQUIRES VERIFICATION.**
+
+Added on the active context branch:
+
+- `CONTEXT_ENTRYPOINT.md` — canonical read order, branch guard, current operating state, and truth discipline;
+- `CLAUDE.md` — minimal Claude Code auto-load router pointing to the entrypoint;
+- `AGENTS.md` — minimal Codex/agent router pointing to the same entrypoint.
+
+Commits:
+
+- `2b210d9...` — `CONTEXT_ENTRYPOINT.md`
+- `830e6d9...` — `CLAUDE.md`
+- `afa05f0...` — `AGENTS.md`
+
+The design intentionally keeps the auto-loaded router small, matching the prior Claude-web guidance that `CLAUDE.md` should route to durable context rather than duplicate the entire project state.
+
+Remaining local-action requirement:
+
+- verify `git status --short` before switching branches;
+- if clean, fetch/switch to `presentation-context-20260820` and fast-forward pull;
+- then explicitly instruct running Claude Code to read `CLAUDE.md` and `CONTEXT_ENTRYPOINT.md` before continuing.
+
+If local status is not clean, do not switch blindly; inspect/preserve the live work first.
+
+---
+
 ## Current audit conclusion
 
 The GitHub/context architecture and night-run infrastructure are substantially real and inspectable.
