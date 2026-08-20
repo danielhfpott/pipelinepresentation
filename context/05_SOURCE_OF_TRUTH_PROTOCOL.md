@@ -93,3 +93,47 @@ Any AI collaborator entering this project should treat the repository as the dur
 Before making large architectural or presentation conclusions, it should inspect the current repository context and then compare its own findings against that shared state.
 
 The goal is one evolving evidence field, not several parallel AI realities.
+
+## 8. GitHub is an active collaboration substrate, not a passive submission folder
+
+As delivery approaches, this repository has three simultaneous roles:
+
+1. **project source of truth** — the most current reconciled account of what the project is, what exists, what remains uncertain, and how the parts fit together;
+2. **agent context surface** — Codex, Claude Code, and other collaborators working from VS Code should be able to enter from the repository and inherit enough context to act coherently even if Daniel's immediate chat prompt is minimal;
+3. **judged delivery artifact** — the public GitHub repository becomes part of what Corti can inspect as the submitted project itself.
+
+This means substantial synthesis, corrections, implementation-state findings, presentation decisions, night-run state, and cross-team relationships should be written back to GitHub rather than living only in chat.
+
+The repository should therefore be useful both to a human judge opening it for the first time and to an AI agent resuming work at 03:00 without prior chat context.
+
+## 9. Delivery is multi-surface
+
+"Delivery" does not mean sending a static package.
+
+The final judged project is expected to span at least two coupled surfaces:
+
+### A. GitHub / inspectable project reality
+
+This contains the code, documentation, context architecture, evidence, implementation status, reproducibility instructions, demo support, night-run outputs, provenance, and other inspectable project artifacts that can truthfully live in a public repository.
+
+### B. Live presentation / user experience
+
+Some project value can only be demonstrated experientially: running UI behavior, live interaction, audio, timing, clinical flow, handoff, and other user-facing behavior.
+
+Those elements may not be reducible to static repository files, but the repository should still explain how they relate to the submitted code and should preserve whatever screenshots, logs, fallback recordings, instructions, or evidence are appropriate and publishable.
+
+The goal is not for GitHub to replace the user experience. The goal is for GitHub and the user experience to describe the **same project reality from two complementary angles**.
+
+## 10. Approaching-delivery rule
+
+The closer the team gets to submission, the less acceptable it becomes for important project understanding to exist only in ephemeral conversation.
+
+Substantial new insight should be triaged immediately:
+
+- if it changes the project's understood reality, update the relevant source-of-truth file;
+- if it changes implementation status, record the new evidence/status;
+- if it changes the five-minute demo, update the working pipeline/demo map;
+- if it changes what an overnight agent should optimize, update `NIGHT_RUN.md` or `.nightrun/STATE.md` as appropriate;
+- if it is still speculative, preserve it with that status rather than forcing it into canonical truth.
+
+A trivial conversational greeting does not itself need a commit. The **meaningful project state that an agent should inherit after that greeting does**.
