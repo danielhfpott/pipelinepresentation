@@ -51,10 +51,109 @@ Status: **RAW SOURCE / TEAM INTENT**. It is not an implementation specification.
 
 Important interpretation rule: questions and speculative phrases in the notes are evidence that the team explored those areas; they are not proof that the corresponding feature exists or belongs in the final spine.
 
+## Source E — Claude build/presentation documents supplied separately
+
+Observed files include:
+
+- `PRESENTATION_BUILD.md`
+- `HACKATHON_TRUTH_DOCTRINE.md`
+- duplicate `HACKATHON_TRUTH_DOCTRINE (1).md`
+- `presentation_date200826time1402(1).txt`
+
+Byte-level reconciliation is recorded in:
+
+`context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
+
+Important relationship: surrounding **Claude web-chat conversations are part of the formation/provenance context for these documents**. A generated document plus the chat that helped create it are not independent corroborating sources.
+
+## Source F — Corti spoken assignment/judging transcript supplied through prior ChatGPT conversation
+
+Observed content includes the stated judging dimensions, four-of-five product-area requirement, “beyond a typical ambient scribe” guidance, roughly five-minute demo format, Q&A, crowd vote, and superlatives.
+
+Status: **SOURCE-REPORTED SPOKEN HACKATHON BRIEFING**.
+
+Preserved/reconciled at:
+
+`context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
+
+Do not silently upgrade it to official written rules unless an official written source is later supplied.
+
+## Source G — Daniel/Frank prehospital workflow transcript + Claude web-chat synthesis
+
+Observed content includes:
+
+- no direct doctor audio contact with the 112 call;
+- evolving text context on the doctor/ambulance screen;
+- mental preparation before arrival;
+- on-scene assessment/monitoring/treatment/stabilisation;
+- transport documentation/dictation;
+- Frank’s report that he already uses his app in practice;
+- reported pre-arrival handoff benefit;
+- limited longitudinal history on the ambulance side;
+- possible future extensions such as richer call transcription and earlier history access.
+
+Status: **FIRST-HAND TEAM CLINICAL WORKFLOW SOURCE + SECONDARY CLAUDE ANALYSIS**.
+
+Preserved/reconciled at:
+
+`context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
+
+## Source H — exact known-good prior PowerShell night-run driver (`4.txt`)
+
+The exact uploaded file was read directly rather than reconstructed from memory.
+
+Verified original metadata:
+
+- size: `3172` bytes
+- SHA-256: `731033334d93d3dae7bb72991725a89494431d6f5aa8c4e2ee801143843d79d1`
+
+Preserved at:
+
+`context/sources/KNOWN_GOOD_NIGHTRUN_DRIVER_4.txt`
+
+Status: **HISTORICALLY PROVEN LOCAL ORCHESTRATION PATTERN**.
+
+Important: the original working-directory path belongs to the earlier voice-pipeline project. The current hackathon launcher must adapt paths rather than blindly reuse them.
+
+## Source I — Claude web-chat acute/prehospital public-research thread
+
+Observed themes include:
+
+- stroke/OHCA recognition;
+- 1813/112 entry flow;
+- Dansk Indeks registration/classification;
+- ambulance response/disposition;
+- PPJ/handoff;
+- 24-hour renewed-contact indicators;
+- Region Østdanmark merger;
+- possible “software-shaped seams” across the pipeline.
+
+Status: **PUBLIC-RESEARCH + AGENT INTERPRETATION SOURCE CLUSTER**.
+
+Several quantitative claims have now been independently checked. Some survived; some required correction; many interpretive wedges remain unverified.
+
+Preserved/reconciled at:
+
+`context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
+
+Key current correction: Region H’s 2026 B-response service target is **93% within 30 minutes**, so older 25-minute / ~37-minute framing must not be presented as the current target.
+
+## Source J — assistant execution truth audit
+
+Because assistant wording such as “I’m doing X” can itself become accidental context, substantive assistant commitments are now audited against actual GitHub/tool/runtime evidence.
+
+Preserved at:
+
+`context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
+
+Status: **META-EVIDENCE / PROCESS INTEGRITY RECORD**.
+
+It explicitly marks actions as DONE / PARTIAL / CORRECTED / NOT YET DONE / ONGOING.
+
 ## Next ingestion rule
 
-For any further archive, repo, screenshot, export, or code drop:
+For any further archive, repo, screenshot, export, code drop, chat transcript, generated document, or research thread:
 
-`inspect contents -> record literal observations -> detect duplication/history -> map relationships -> reconcile against current implementation -> only then derive presentation significance`
+`inspect contents -> record literal observations -> identify provenance/dependencies -> detect duplication/history -> map relationships -> reconcile against current implementation/external evidence -> only then derive presentation significance`
 
-Never reverse that order because an artifact name looks familiar or a prior synthesis looks authoritative.
+Never reverse that order because an artifact name looks familiar, an AI response sounds confident, or a prior synthesis looks authoritative.

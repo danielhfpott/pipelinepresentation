@@ -1,0 +1,43 @@
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+cd "C:\Users\BrugMig\Desktop\claudecodewithinvscodeprojects\voicepipelinedesktopprogramexploration_sourceoftruth\voicepipeline_work"
+Get-Item NIGHT_RUN.md | Select-Object Name,Length
+git add -A
+git commit -m "chore: add night run protocol"
+git status --porcelain
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+$claude = (Get-ChildItem "$env:USERPROFILE\.vscode\extensions\anthropic.claude-code*" -Recurse -Include claude.exe -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
+& $claude -p --permission-mode dontAsk "Read NIGHT_RUN.md and execute exactly one iteration. Issue git commands one at a time, never chained with &&. Then stop."
+git log --oneline -3
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+New commit appears → start the driver:
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+for ($i=1; $i -le 300; $i++) {
+  "=== iter $i $(Get-Date -Format o) ===" | Add-Content .nightrun\driver.log
+  & $claude -p --permission-mode dontAsk "Read NIGHT_RUN.md and execute exactly one iteration. Issue git commands one at a time, never chained with &&. Then stop." 2>&1 | Add-Content .nightrun\driver.log
+  if ($LASTEXITCODE -ne 0) { break }
+  if (Select-String -Path .nightrun\STATE.md -Pattern "blocked: (?!NONE)" -Quiet) { break }
+  Start-Sleep 5
+}
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+Morning: Get-Content .nightrun\STATE.md first.
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+SOURCE PROVENANCE
+-----------------
+Original user-supplied file: 4.txt
+Original size: 3172 bytes
+Original SHA-256: 731033334d93d3dae7bb72991725a89494431d6f5aa8c4e2ee801143843d79d1
+
+This copy preserves the known-good prior PowerShell sequence as source evidence. Its original working directory belongs to the earlier voice-pipeline run and must not be reused blindly for the current hackathon project. The current project's executable launcher must adapt paths conservatively while preserving the proven orchestration semantics.
