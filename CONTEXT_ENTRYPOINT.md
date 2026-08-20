@@ -24,39 +24,38 @@ Read these in order before making large conclusions:
 2. `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
 3. `context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md`
 4. `context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md`
-5. `context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md`
-6. `context/15_FIVE_MINUTE_PRESENTATION_SPINE.md`
-7. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
-8. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-9. `context/03_LIVING_SYNTHESIS.md`
-10. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
-11. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
-12. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
-13. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
-14. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
-15. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
-16. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
-17. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
+5. `context/16_DEMO_SURFACE_RECONCILIATION.md`
+6. `context/17_RED_TEAM.md`
+7. `context/18_CLAUDE_CODE_CHAT_RECONCILIATION.md`
+8. `context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md`
+9. `context/15_FIVE_MINUTE_PRESENTATION_SPINE.md`
+10. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
+11. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
+12. `context/03_LIVING_SYNTHESIS.md`
+13. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
+14. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
+15. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
+16. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
+17. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
+18. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
+19. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
+20. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
 
 Then inspect the exact code/runtime evidence needed for the task.
 
 ## Why these files are high priority
 
-`context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md` captures the current thread's combined contribution to:
+`context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md` captures the current ChatGPT thread's combined contribution to night-run mechanics, GitHub-as-shared-memory rules, branch/context-drift prevention, phone/presentation actualization, X-ray overlays, and the distinction between project truth and later rubric optimization.
 
-- night-run purpose/mechanics;
-- GitHub-as-shared-memory rules;
-- branch/context-drift prevention;
-- assistant execution truth auditing;
-- phone-first live presentation actualization;
-- functionality-neutral phone mirroring/control;
-- persistent live phone state across scene switches;
-- presentation-only X-ray/detail overlays;
-- the distinction between project truth and later judging/rubric optimization.
+`context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md` contains direct implementation/test evidence for Frank's build, including executed test/build findings and explicit limits on what was not live-tested.
 
-`context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md` is now the strongest direct implementation/test evidence currently present in this presentation repository for Frank's build. It records what was actually inspected/executed and what remains unobserved.
+`context/16_DEMO_SURFACE_RECONCILIATION.md` corrects the earlier phone premise against code evidence: the current product is a mobile-format Vite web app, not a native/PWA phone package. A phone remains a possible presentation surface, but mirroring is a credibility/embodiment choice rather than a fidelity requirement. It also records microphone/runtime constraints and the interactive zero-backend demo path.
 
-`context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md` reconciles the newest WebClaude interpretation against that runtime evidence and current official `docs.corti.ai` material. It is the current bridge between implementation reality, Corti platform truth, and presentation compression.
+`context/17_RED_TEAM.md` records the from-scratch provenance verification, stage-failure drills, timing ambiguity, claim hygiene, keyterms opportunity, and other high-risk/high-value presentation findings.
+
+`context/18_CLAUDE_CODE_CHAT_RECONCILIATION.md` preserves the latest user-supplied Claude Code conversation as a provenance/execution source and reconciles its strongest command/output evidence into the shared project model.
+
+`context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md` reconciles WebClaude interpretation against runtime evidence and current official `docs.corti.ai` material.
 
 `context/15_FIVE_MINUTE_PRESENTATION_SPINE.md` is a candidate run spine, not a locked script. It should be improved/rejected/reframed as stronger whole-team and UX/runtime evidence arrives.
 
@@ -75,11 +74,16 @@ Preserve contradictions rather than smoothing them away.
 - The pipeline baseline is **not frozen**.
 - The night run is **blocked** until the baseline is frozen.
 - A final polished presentation artifact has **not yet been created**.
-- Frank's deterministic implementation layers now have substantial direct runtime/test evidence, including 159/159 tests passing in Claude Code's verification; live Corti execution still requires separate evidence.
-- A candidate approximately five-minute spine now exists and centers one continuous encounter rather than a feature tour.
-- Current presentation actualization is converging on a persistent real-phone demo with presentation-only X-ray/detail overlays used selectively rather than as an exploratory flow.
-- Official Corti docs now form a primary technical source for STT, `/streams`, keyterms, audio events, agentic framework, text generation, and medical coding capability semantics.
-- Whole-team mapping, exact phone/UI live path, and final demo choreography still need reconciliation before baseline freeze.
+- Frank's deterministic implementation layers have substantial direct runtime/test evidence, including 159/159 tests passing in Claude Code's verification; live Corti execution remains a separate evidence question.
+- Frank's repository history has been inspected as a from-scratch provenance timeline: pre-hackathon commits contain documentation/data material and no application-code file types; application code begins on hackathon day.
+- A candidate approximately five-minute spine exists and centers one continuous encounter rather than a feature tour.
+- The current product surface is a **mobile-format Vite web app**. A phone-hosted/mirrored presentation remains possible, but laptop browser execution can be the same application bundle/backend path; choose by rehearsal reliability and presentation value.
+- A zero-backend interactive demo mode exists and materially strengthens the fallback hierarchy; it still needs deliberate rehearsal.
+- The strongest current X-ray candidate is one short safety-context moment that makes invisible longitudinal context visible rather than creating an exploratory architecture tour.
+- Three distinct Corti transcription surfaces have been found in code: batch transcription, stateful ambient `/streams`, and stateless real-time audio-bridge transcription.
+- Official Corti docs remain a primary technical source for STT, `/streams`, keyterms, audio events, agentic framework, text generation, and coding semantics.
+- Medical coding is **not currently a presentation-critical build target**; availability/tenant semantics are nuanced and the current project already has stronger actualization priorities.
+- Whole-team mapping, Frank's clinical sign-off for the chosen case, Mihai/fourth-teammate contribution/speaking reality, exact live/demo-only rehearsal path, and final 180s/135s choreography still need reconciliation before baseline freeze.
 - GitHub is both the collaboration substrate and part of the judged delivery, while the live demo/presentation is the complementary experiential surface.
 
 ## Agent handoff rule
