@@ -2,9 +2,11 @@
 
 ## Status
 
-**Source:** user-supplied transcript of an in-hackathon conversation with Frank, a practicing physician on the team, describing his actual prehospital/ambulance workflow and the app he already uses.
+**Source:** user-supplied transcript of an in-hackathon conversation with Frank, a practicing physician on the team, together with analysis/synthesis produced in a **Claude web chat**.
 
-**Evidence class:** first-hand team clinical workflow source. Treat statements about Frank's own workflow as strong current-state evidence. Broader claims about regional systems, performance, permissions, or prevalence still require independent verification where they matter to the final presentation.
+**Provenance distinction:** the clinical/workflow statements originate from Daniel and Frank's recorded/spoken conversation. Claude's surrounding response is a secondary interpretation layer. Treat Frank's statements about his own workflow as strong first-hand team evidence; treat Claude's synthesis as useful analysis that must remain subordinate to the source transcript and later implementation evidence.
+
+**Evidence class:** first-hand team clinical workflow source + secondary agent synthesis. Broader claims about regional systems, performance, permissions, or prevalence still require independent verification where they matter to the final presentation.
 
 This file intentionally separates **CURRENT WORKFLOW** from **POSSIBLE EXTENSIONS**.
 
@@ -195,6 +197,8 @@ These extensions must remain visibly separate from what already happens today.
 ## 9. Presentation significance
 
 This source is unusually valuable because it supplies a **real clinician-described before/during/after workflow** and also identifies a capability already used in practice.
+
+Claude's synthesis usefully highlighted the convergence of acute/pre-hospital context with longitudinal hospital-record context, but that framing remains a secondary interpretation rather than the source itself.
 
 For a five-minute demo, the likely value is not to explain every box. The value is that the team can potentially anchor the demo in a real sequence:
 
