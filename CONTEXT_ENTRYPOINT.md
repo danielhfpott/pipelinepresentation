@@ -2,19 +2,26 @@
 
 ## Purpose
 
-This repository is the shared context surface for the hackathon project/presentation effort. Any agent entering the project must orient from the repository before making architectural, implementation, or presentation decisions.
+This repository is the shared context surface for the hackathon project/presentation effort. Any agent entering the project must orient from the repository before making architectural, implementation, presentation, or night-run decisions.
 
 ## Branch guard
 
-The current active context branch is:
+The current active consolidation branch is:
 
-`presentation-context-20260820`
+`presentation-consolidation-20260821`
+
+It was created from `main` at `f9d9b221e74dea22463948864311cb8a172cc04f` specifically to reunify:
+
+- merged runtime/red-team evidence;
+- PR #7's direct Corti medical-coding correction;
+- the latest ChatGPT / Claude Code reconciliation;
+- the cumulative night-run state.
 
 Before reasoning from repository state, verify the checked-out branch and current commit.
 
-If you are on `main` while this branch contains newer context, do **not** assume `main` represents the latest project understanding.
+If this consolidation branch contains commits not yet merged to `main`, do **not** assume `main` contains the latest synthesis. Conversely, do not assume this branch outranks later runtime/code evidence merely because it is the active synthesis branch.
 
-Do not switch branches, merge, reset, clean, delete, move, rename, overwrite, or force anything automatically if there are local changes. First inspect `git status --short` and preserve the workspace.
+Do not delete, reset, clean, move, rename, overwrite, force-push, or otherwise destructively normalize a workspace. Inspect status and preserve local work.
 
 ## Read order
 
@@ -22,68 +29,82 @@ Read these in order before making large conclusions:
 
 1. `context/00_READ_ME_FIRST.md`
 2. `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
-3. `context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md`
+3. **`context/19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md`**
 4. `context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md`
-5. `context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md`
-6. `context/15_FIVE_MINUTE_PRESENTATION_SPINE.md`
-7. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
-8. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-9. `context/03_LIVING_SYNTHESIS.md`
-10. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
-11. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
-12. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
-13. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
-14. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
-15. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
-16. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
-17. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
+5. `context/16_DEMO_SURFACE_RECONCILIATION.md`
+6. `context/17_RED_TEAM.md`
+7. `context/18_CLAUDE_CODE_CHAT_RECONCILIATION.md`
+8. `context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md`
+9. `context/15_FIVE_MINUTE_PRESENTATION_SPINE.md`
+10. `context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md`
+11. `context/12_ASSISTANT_EXECUTION_TRUTH_AUDIT.md`
+12. `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
+13. `context/03_LIVING_SYNTHESIS.md`
+14. `context/14_PRESENTATION_ACTUALIZATION_PHONE_DEMO_PATH.md`
+15. `context/15_PRESENTATION_XRAY_OVERLAY_MODE.md`
+16. `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
+17. `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
+18. `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md`
+19. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
+20. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
+21. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
 
-Then inspect the exact code/runtime evidence needed for the task.
+Then inspect the exact code/runtime/source evidence needed for the task.
 
-## Why these files are high priority
+## Why `19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md` is first-class
 
-`context/16_THIS_CHAT_FORENSIC_RECONSTRUCTION_AND_SYNTHESIS.md` captures the current thread's combined contribution to:
+The repository intentionally preserves older documents, including conclusions later corrected by stronger evidence.
 
-- night-run purpose/mechanics;
-- GitHub-as-shared-memory rules;
-- branch/context-drift prevention;
-- assistant execution truth auditing;
-- phone-first live presentation actualization;
-- functionality-neutral phone mirroring/control;
-- persistent live phone state across scene switches;
-- presentation-only X-ray/detail overlays;
-- the distinction between project truth and later judging/rubric optimization.
+Doc 19 provides the current **supersession map**. It records, among other things:
 
-`context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md` is now the strongest direct implementation/test evidence currently present in this presentation repository for Frank's build. It records what was actually inspected/executed and what remains unobserved.
+- ~5-minute format superseding ~15-minute assumptions;
+- Frank runtime/test evidence;
+- from-scratch git-history verification;
+- mobile web app correction to the earlier phone-runtime premise;
+- interactive zero-backend fallback discovery;
+- three distinct Corti transcription surfaces;
+- PR #7's direct-docs correction reopening medical coding as optional upside;
+- one-X-ray-moment compression;
+- exact safe wording for the `missing` rule;
+- remaining human/team/baseline-freeze gaps.
 
-`context/17_WEBCLAUDE_STATUS_AND_CORTI_DOCS_RECONCILIATION.md` reconciles the newest WebClaude interpretation against that runtime evidence and current official `docs.corti.ai` material. It is the current bridge between implementation reality, Corti platform truth, and presentation compression.
-
-`context/15_FIVE_MINUTE_PRESENTATION_SPINE.md` is a candidate run spine, not a locked script. It should be improved/rejected/reframed as stronger whole-team and UX/runtime evidence arrives.
+Do not make a cold agent rediscover these corrections by reading documents in chronological order and choosing whichever sounds most confident.
 
 ## Truth rule
 
-Do not treat a filename, README, document title, AI synthesis, teammate statement, or this file itself as runtime proof.
+A filename, README, title, AI synthesis, teammate statement, or this file itself is not runtime proof.
 
-Use the progression:
+Use:
 
-`source claim -> code evidence -> runtime/test evidence -> UX/demoability -> presentation-safe claim`
+`source claim -> code/artifact evidence -> runtime/test evidence -> UX/demoability -> presentation-safe claim`
 
-Preserve contradictions rather than smoothing them away.
+When evidence conflicts, preserve the conflict until stronger evidence resolves it. When stronger evidence does resolve it, record the supersession rather than silently deleting history.
 
 ## Current operating state
 
-- The pipeline baseline is **not frozen**.
-- The night run is **blocked** until the baseline is frozen.
-- A final polished presentation artifact has **not yet been created**.
-- Frank's deterministic implementation layers now have substantial direct runtime/test evidence, including 159/159 tests passing in Claude Code's verification; live Corti execution still requires separate evidence.
-- A candidate approximately five-minute spine now exists and centers one continuous encounter rather than a feature tour.
-- Current presentation actualization is converging on a persistent real-phone demo with presentation-only X-ray/detail overlays used selectively rather than as an exploratory flow.
-- Official Corti docs now form a primary technical source for STT, `/streams`, keyterms, audio events, agentic framework, text generation, and medical coding capability semantics.
-- Whole-team mapping, exact phone/UI live path, and final demo choreography still need reconciliation before baseline freeze.
-- GitHub is both the collaboration substrate and part of the judged delivery, while the live demo/presentation is the complementary experiential surface.
+- The pipeline/presentation baseline is **not yet frozen**.
+- The night run remains **blocked** until baseline freeze.
+- Frank's implementation has substantial deterministic execution evidence at last verified commit `b1f816b`, including 159/159 tests passing.
+- Frank's from-scratch implementation timeline has been verified from full git history.
+- The current product surface is a **mobile-format Vite web app**, not a native/PWA phone package.
+- Phone vs laptop browser is therefore a presentation/reliability choice, not a functional-fidelity choice.
+- A zero-backend interactive demo mode exists; the fallback switch still needs rehearsal.
+- Three distinct Corti transcription modes are present in code.
+- Four of five stated Corti product areas are mapped in the current build; medical coding is absent from the build but current v2 coding is documented and is optional one-test/tiny-upside work, not a blocker.
+- The strongest current demo hypothesis is one continuous encounter with the safety/context beat as the load-bearing beyond-scribe moment.
+- One short X-ray overlay on that beat is the strongest current explanatory-layer candidate.
+- Preloaded audio is currently the safer default unless live capture proves more valuable in rehearsal.
+- Exact connected runtime path, fallback rehearsal, clinical case/sign-off, team speaking map, stopwatch timing, and current Frank-repo head still gate baseline freeze.
+- GitHub is the collaboration/submission truth surface; the live demo is the experiential proof surface.
 
 ## Agent handoff rule
 
-If you discover something that materially changes project truth, implementation status, demoability, Corti-rubric coverage, or the presentation spine, write the reconciled result back to GitHub with provenance/status rather than leaving it only in chat.
+If new evidence materially changes project truth, implementation status, demoability, Corti coverage, presentation spine, or night-run readiness:
 
-Do not let a cold-session agent silently start a parallel version of the project.
+1. identify the exact current statement being changed;
+2. record the stronger evidence;
+3. preserve what remains true;
+4. update the canonical consolidated state and/or `.nightrun/STATE.md`;
+5. do not leave the correction only in chat.
+
+Do not let a cold-session agent silently create a parallel project interpretation.
