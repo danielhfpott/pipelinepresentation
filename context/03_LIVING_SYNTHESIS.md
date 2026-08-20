@@ -132,3 +132,29 @@ The terminal objective remains an actual presentation of the actual project.
 The audience should not leave thinking: "they have an idea and some Markdown."
 
 They should be able to understand a meaningful acute-care problem, see real functioning manifestations of the team's work, understand what Corti contributes, and perceive a credible path beyond the hackathon without being misled about what is already implemented.
+
+## 11. Hard presentation accountability question: what have we actually done as work?
+
+Daniel explicitly promised the rest of the team that he would bring something strong for the final presentation around the question: **"what have we actually done as work?"**
+
+This is therefore not merely a retrospective summary question. It is a hard presentation constraint.
+
+The final presentation should make the team's actual work legible across more than one layer, including where supported:
+
+- what problem-space understanding the team developed;
+- what clinical workflow knowledge was contributed;
+- what was designed or architected;
+- what was coded or configured;
+- what was tested;
+- what is actually runnable or demoable;
+- what Corti functionality is genuinely being used;
+- what connective/context-architecture work turned separate contributions into one coherent project;
+- what remains partial, assumed, or future.
+
+The presentation should not accidentally reduce "work" to only lines of code, nor inflate brainstorming into implementation. It should show the strongest truthful account of the team's total hackathon work and make visible how the different contributions support one another.
+
+A useful test for every major presentation section is:
+
+> **Does this help the audience understand what the team actually did, why it mattered, and what evidence shows it?**
+
+If not, it may belong in the underlying context rather than in the final 15-minute experience.
