@@ -2,13 +2,50 @@
 
 blocked: PIPELINE_BASELINE_NOT_FROZEN
 iteration: 0
-last_updated: 2026-08-21T00:47:00+02:00
+last_updated: 2026-08-21T00:52:00+02:00
 baseline_commit: NOT_FROZEN
 current_context_branch: presentation-consolidation-20260821
-current_consolidation_base_main: f9d9b221e74dea22463948864311cb8a172cc04f
-current_context_head_before_state_update: 4858cbf476db36fd6fa4cd184171abc748f268f1
+main_head_at_final_checkpoint: bce42c14cd1e8ccd345333436b4762a98b88888b
+current_context_head_before_state_update: bce42c14cd1e8ccd345333436b4762a98b88888b
+checkpoint: FINAL_PRE_SLEEP_CONSOLIDATION_2026-08-21T00:52+02:00
 target: NONE
 result: WAITING_FOR_EXACT_BASELINE_FREEZE
+
+## Final pre-sleep consolidation checkpoint
+
+This is the final consolidation checkpoint before Daniel stops active work for this session.
+
+Repository state checked immediately before this update:
+
+- PR #7 merged: current Corti v2 medical-coding interpretation corrected against direct docs evidence;
+- PR #8 merged: corrected Claude Code chat reconciliation added;
+- PR #9 merged: canonical consolidated state, repaired context router, refreshed night-run state, reconciled five-minute spine, and canonical night-run orientation all landed in `main`;
+- latest observed `main` commit: `bce42c14cd1e8ccd345333436b4762a98b88888b`;
+- no newer `pipelinepresentation` commit was observed after PR #9 at the moment this checkpoint was written;
+- `presentation-consolidation-20260821` was fast-forwarded to that exact `main` head before this state update.
+
+This checkpoint intentionally does **not** freeze the project baseline and does **not** activate the unattended night run.
+
+### Resume rule
+
+On the next human or agent session:
+
+1. fetch/pull current GitHub state and verify whether `main` moved beyond `bce42c14cd1e8ccd345333436b4762a98b88888b`;
+2. read `CONTEXT_ENTRYPOINT.md`;
+3. read `context/19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md`;
+4. read this `.nightrun/STATE.md`;
+5. inspect only evidence that changed after this checkpoint;
+6. continue from the remaining baseline-freeze gates rather than reconstructing the entire project from older chats/docs.
+
+Do not reopen superseded assumptions such as:
+
+- ~15-minute presentation;
+- phone mirroring being required for functional fidelity;
+- fallback being only a video;
+- medical coding being definitely unavailable;
+- `missing` proving Daniel's doctrine was intentionally encoded into Frank's rule engine.
+
+Those questions are already reconciled in the canonical state unless new stronger evidence changes them.
 
 ## Purpose of this file
 
