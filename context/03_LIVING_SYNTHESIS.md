@@ -6,7 +6,7 @@ This file captures only synthesis that currently appears stable enough to preser
 
 The presentation may ultimately be extremely simple for the audience, but that simplicity should be earned through a much larger context model underneath it.
 
-The team should not compress too early. First gather and reconcile the relevant clinical reality, Corti constraints/opportunities, team intent, actual code, runtime behavior, user experience, evidence, uncertainty, and future possibility. Only then decide what survives into the approximately 15-minute experience.
+The team should not compress too early. First gather and reconcile the relevant clinical reality, Corti constraints/opportunities, team intent, actual code, runtime behavior, user experience, evidence, uncertainty, and future possibility. Only then decide what survives into the approximately **five-minute demo experience** plus judge Q&A.
 
 A useful shorthand is:
 
@@ -36,7 +36,7 @@ The goal is not for the context architect to know every function implementation 
 
 ## 3. Presentation must fit reality
 
-The deck is downstream of the project reality.
+The deck/demo is downstream of the project reality.
 
 Do not reshape reality to fit a cleaner narrative. Do not treat a brainstorm as implemented simply because it sounds compelling. Do not treat code as the full meaning of the project simply because it is executable.
 
@@ -59,9 +59,9 @@ Even a filename that appears uncannily descriptive should not be treated as evid
 
 ## 5. "Above and beyond" currently means completeness before compression, not feature explosion
 
-Daniel reports that Corti strongly and explicitly emphasized an "above and beyond" direction during the hackathon briefing. Until the official material is supplied or independently verified, that wording remains team-reported verbal context rather than a published judging criterion.
+The Corti spoken assignment transcript now supplies stronger grounding than earlier memory alone: teams are explicitly asked to go **beyond a typical ambient scribe** and are judged on **insight and ambition** as one of five equally weighted categories.
 
-Within the team's own interpretation, the useful principle is:
+Within the team's own interpretation, the useful principle remains:
 
 > Above and beyond is not automatically "add more features." It is refusing premature closure on the relevant context.
 
@@ -97,7 +97,7 @@ Underneath that apparently simple experience may sit:
 - implementation-state inspection;
 - rejected alternatives;
 - future/above-and-beyond possibilities;
-- multi-agent synthesis and overnight work.
+- multi-agent synthesis and remaining build work.
 
 The complexity belongs primarily in the understanding. The audience should not be forced to process the entire internal context architecture.
 
@@ -107,7 +107,7 @@ The current raw context repeatedly touches an acute-care continuum that may incl
 
 `112 / dispatch -> ambulance / encounter -> live context -> clinical support/action -> treatment/event logging -> pre-arrival hospital handoff -> later documentation/reflection`
 
-This remains a candidate relationship map only. The actual presentation spine must be reconciled against what all teammates have really built and what can be demonstrated reliably.
+This remains a candidate relationship map only. The actual presentation spine must be reconciled against what all teammates have really built, what can be demonstrated reliably, and the five-minute demo constraint.
 
 ## 9. Current evidence classes to preserve
 
@@ -127,7 +127,7 @@ The purpose is not bureaucracy. It is to prevent inference from silently becomin
 
 ## 10. Terminal objective
 
-The terminal objective remains an actual presentation of the actual project.
+The terminal objective remains an actual judged delivery of the actual project: a coherent public GitHub submission and a highly compressed, working final demo.
 
 The audience should not leave thinking: "they have an idea and some Markdown."
 
@@ -157,4 +157,4 @@ A useful test for every major presentation section is:
 
 > **Does this help the audience understand what the team actually did, why it mattered, and what evidence shows it?**
 
-If not, it may belong in the underlying context rather than in the final 15-minute experience.
+If not, it may belong in the underlying context rather than in the final five-minute demo experience.
