@@ -2,165 +2,292 @@
 
 ## Status
 
-**Candidate spine, not a locked script.** Built by reconciling the verified implementation (`14_FRANK_BUILD_RUNTIME_VERIFICATION.md`) against the stated rubric (`08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`) and the clinician-described workflow (`09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`).
+**Candidate spine, not a locked script.**
 
-**Requires Frank's approval on every clinical specific.** Per `07_CONTEXTUAL_CLINICAL_ASSISTANCE_CASE.md`, no medication, dose, or protocol detail in this file may be invented. Where a clinical value is needed below, it is marked `[FRANK]` and must come from him or from the VIP/Akut Barn corpus.
+This version is reconciled through:
+
+- `14_FRANK_BUILD_RUNTIME_VERIFICATION.md`;
+- `16_DEMO_SURFACE_RECONCILIATION.md`;
+- `17_RED_TEAM.md`, including the PR #7 medical-coding correction;
+- `19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md`.
+
+It is still a hypothesis until the exact case/runtime path is rehearsed with a stopwatch.
+
+**Every clinical-specific demo value requires Frank's approval and must match implemented rule/data paths.** Do not invent medication, dose, allergy, contraindication, or protocol content for narrative neatness.
 
 ---
 
 ## 1. The constraint that changes everything
 
-The format is **~5 minutes of demo, then questions from three judges** — not 15 minutes. Every team member must also introduce themselves. With four people, introductions alone can consume 10% of the slot.
+The supplied briefing says approximately **five minutes of presentation/demo, followed by questions from three judges**. Every team member must briefly introduce themselves.
 
 This forces three decisions:
 
-1. **No architecture slide.** There is no time to explain thirteen edge functions. The architecture must be *visible in the demo*, not narrated.
-2. **One patient, one unbroken take.** The thesis is that context survives across time and boundaries. Cutting between features destroys the argument it is trying to make.
-3. **Crowd voting is 20%.** A non-specialist has to understand the value without any clinical background.
+1. **No architecture tour.** Architecture should become visible through the encounter or one surgical explanatory layer.
+2. **One patient, one unbroken take.** The project argument is continuity of context. Restarting separate feature demos weakens it.
+3. **Crowd comprehension matters.** Crowd voting is 20%; a non-specialist must understand the value without decoding thirteen edge functions.
 
 ---
 
-## 2. Time budget (300 seconds)
+## 2. Time budget — primary 300-second version
 
 | Beat | Seconds | Running |
-|---|---|---|
+|---|---:|---:|
 | Four introductions | 25 | 0:25 |
-| The problem, in one sentence and one example | 30 | 0:55 |
-| **Demo — single continuous encounter** | **180** | **3:55** |
+| Problem / context framing | 30 | 0:55 |
+| **Single continuous demo** | **180** | **3:55** |
 | What makes it more than a scribe | 45 | 4:40 |
 | Close | 20 | 5:00 |
 
-Introductions must be rehearsed to ~6 seconds each — name, role, one clause. This is the single easiest place to lose half a minute.
+Also rehearse a **135-second compressed demo cut**. Do not average the two timing interpretations. The shorter cut removes lower-priority retrieval/question material before it removes the safety, note, or handoff spine.
 
 ---
 
-## 3. The problem beat (30s)
+## 3. Problem beat — approximately 30 seconds
 
-The strongest available framing comes from `07_…`, because it is a real observed failure, not a hypothetical:
+A strong observed example from the supplied project context is the general-assistant failure around an acute fentanyl question: the literal sentence was interpreted without the surrounding prehospital situation.
 
-> Ask a general assistant *"how much fentanyl for a 20-year-old?"* and it may start talking about the opioid epidemic — because it treats the sentence as the unit of meaning.
->
-> A paramedic drawing up fentanyl is not asking that question. **Strip the context and you change what the question means.**
+Presentation principle:
 
-Then the one-sentence problem:
+> **Strip away the context and you can change what the question means.**
 
-> In acute care, context is rebuilt from scratch at every boundary — dispatch to ambulance, ambulance to hospital. **We keep it.**
+Candidate one-sentence project problem:
 
-**Why this beat earns its 30 seconds:** it makes the crowd understand the problem before seeing the product, and it sets up every later beat as an answer.
+> **In acute care, important context is easy to lose as the encounter evolves and crosses boundaries. We keep enough of it alive to remain useful later.**
 
----
-
-## 4. The demo (180s) — one continuous encounter
-
-**Preloaded audio is explicitly permitted** (`08_…` §6), and `viden/17` requires the played dictation to sound spoken, not written — disordered, one self-correction, details remembered late. Use that.
-
-The encounter runs **once**, start to finish. Nothing is restarted.
-
-| # | Beat | Sec | What the audience sees | Rubric hit |
-|---|---|---|---|---|
-| 1 | Ambient on | 30 | The encounter starts. Speech flows into a timestamped clinical event log — not a wall of transcript, a structured record forming in real time | ambient STT · prototype |
-| 2 | Question, in context | 40 | Clinician says **"Forklar…"** / **"Explain…"** and asks a real treatment question. It is answered from *this encounter's* context and the guideline corpus — with its source shown | agentic · text gen · clinical relevance |
-| 3 | **The safety moment** | 45 | A fact stated **early** in the encounter fires against a drug named **much later**. The alert appears *before* administration | **insight & ambition** |
-| 4 | Stop → note | 30 | The event log becomes a structured MIST/ABCDE note across the 11 sections. The clinician did not type | text gen · prototype |
-| 5 | Handoff | 35 | QR scanned by the receiving tablet. **The information arrives before the patient does** | clinical relevance · crowd |
-
-### Beat 3 is the presentation
-
-Everything else is a very good ambient scribe. Beat 3 is not. The rule engine's own comment states the mechanism:
-
-> *"They compare facts with facts, so they fire regardless of how the clinician phrased things and regardless of how far apart in the encounter the two statements were — no keyword matching, no LLM call, free to run on every update."*
-
-Say the consequence out loud, because the audience cannot see it:
-
-> **"That allergy was mentioned four minutes ago. Nobody re-read it. The system never stopped holding it."**
-
-And the sharper line, which answers Corti's "beyond a typical ambient scribe" directly:
-
-> **"A scribe writes down what you said. This checks what you said against what you're about to do."**
-
-Rule 1 fires on a **planned** drug, not only an administered one — so the warning precedes the action. That is the difference between documentation and assistance, and it is the whole pitch.
-
-**Clinical content for beat 3 is `[FRANK]`.** The mechanism is verified; the specific allergy/drug pairing must be his, drawn from the implemented `INTERACTIONS`/`CONTRAINDICATIONS` tables so the demo cannot fail live.
+Do not turn this into an unsupported claim that every dispatch/hospital boundary is technically integrated today.
 
 ---
 
-## 5. Beyond a scribe (45s)
+## 4. Demo — primary 180-second continuous encounter
 
-Three claims, each defensible, in descending order of strength:
+Preloaded/synthetic approved audio is currently the safest default because the Corti briefing explicitly permits it and the code has real microphone/sample-rate/secure-context failure surfaces.
 
-1. **It can stay silent.** `viden/17` calls the negative control the strongest and least-shown result: 96–100% correct refusal versus 63% for search. *"An incorrect guideline suggestion is more dangerous than none."* If beat time exists, **show** it; if not, say it.
-2. **It watches for what is missing**, not only what is wrong. `FindingCategory` is `"keyword" | "contradiction" | "missing"`.
+The **application still runs**; only the input is stabilized.
 
-   > **Say exactly this: "The rule engine checks for what's missing, not just what's wrong."**
-   >
-   > **Corrected — see `17_RED_TEAM.md` §5.** An earlier draft framed the *missing* tier as doc `03_…` §6's *"did I do everything I reasonably could?"* encoded as a rule. That is a claim about **intent**, and it is probably false: Frank most likely built the omission check independently, as ordinary documentation practice. Keep the doctrine connection in the context documents as reconciliation; keep it off the stage. The sentence above is true either way and lands harder.
-3. **Two languages, two different retrieval architectures**, chosen deliberately by corpus shape — many small Danish instructions means an agent picks the document *for* you; one large English guideline means you search *inside* it.
+| # | Beat | Approx. sec | Audience sees | Main value |
+|---|---:|---:|---|---|
+| 1 | Encounter begins | 30 | speech becomes an evolving timestamped clinical context/event log | ambient STT · working system |
+| 2 | In-context question, if time | 35–40 | clinician asks via the implemented wake/query path; answer/relevant source appears | agentic/text generation · clinical relevance |
+| 3 | **Safety/context moment** | 45 | an earlier fact becomes relevant when a later planned action/drug is mentioned; warning appears before action | **insight / beyond scribe** |
+| 4 | Stop → structured note | 30 | encounter material becomes a structured MIST/ABCDE-style note | text generation · prototype |
+| 5 | Handoff manifestation | 30–35 | QR/handoff artifact is generated/scanned in the demonstrated receiving-side flow | continuity · crowd comprehension |
 
-If the 45 seconds must shrink, keep #1 and drop #3.
+### Important boundary on beat 5
+
+The QR implementation is real. Do **not** claim production Epic/EHR integration unless new evidence establishes it.
+
+Safe framing:
+
+> **This is the handoff artifact we can show today; production hospital integration is the next deployment boundary.**
+
+Frank's first-hand workflow evidence that information can reach the receiving team before physical arrival is separate clinical/workflow context; do not silently equate that with production integration of this exact QR implementation.
 
 ---
 
-## 6. Rubric coverage check
+## 5. Beat 3 is currently load-bearing
 
-| Criterion (20% each) | Covered by | Confidence |
+Everything else can be interpreted as excellent ambient documentation. Beat 3 makes the continuity argument visible.
+
+The verified rule-engine mechanism compares encounter facts across time rather than requiring the two statements to be adjacent.
+
+Candidate consequence line:
+
+> **That relevant fact was stated earlier. Nobody had to re-read it. The system was still holding it when the later action appeared.**
+
+Sharper contrast:
+
+> **A scribe records what you said. This can check what you said earlier against what you are about to do now.**
+
+The specific clinical pairing is `[FRANK]`: select one that is guaranteed by the implemented rule/data tables.
+
+### One X-ray moment
+
+This is the one place where the presentation-only X-ray layer currently earns its time.
+
+For <= ~20 seconds, the same product state may gain a judge-facing overlay showing:
+
+`earlier fact -> retained encounter context -> later planned action -> rule/safety evaluation -> alert`
+
+It must **replace narration**, not become a separate architecture excursion.
+
+Then disappear back to the product.
+
+---
+
+## 6. Beyond a typical scribe — approximately 45 seconds
+
+Use only what time earns.
+
+### 1. It can stay silent
+
+The project contains a negative-control/relevance-gating idea: irrelevant retrieval should not be forced merely to make the AI look active.
+
+Use measured percentages only if their provenance/measurement is explicitly attributed and the team wants them on stage.
+
+### 2. It checks what is missing, not just what is wrong
+
+Use exactly:
+
+> **The rule engine checks for what's missing, not just what's wrong.**
+
+Do not claim this was intentionally derived from Daniel's broader context-architecture doctrine unless Frank confirms that implementation intent.
+
+### 3. Different retrieval shapes can be chosen for different corpora
+
+If time remains, explain the deliberate difference between document-selection and passage-search architectures. Drop this before cutting the safety/context point.
+
+---
+
+## 7. Corti coverage — current reconciled state
+
+The supplied briefing names five areas and asks teams to use at least four:
+
+1. dictation;
+2. speech-to-text;
+3. ambient speech-to-text;
+4. text generation;
+5. medical coding.
+
+### Current build
+
+The verified implementation maps the first four.
+
+Closer inspection found three distinct transcription surfaces:
+
+- batch/pre-recorded transcript path;
+- stateful ambient `/streams`;
+- stateless real-time audio-bridge `/transcribe`.
+
+That makes the four-area story stronger than the earliest endpoint-only mapping suggested.
+
+### Medical coding — optional fifth, not a blocker
+
+Coding is **absent from the currently verified Frank build**.
+
+However PR #7 corrected the earlier availability assumption using direct current Corti documentation. The current stateless surface is documented at:
+
+`POST https://api.${ENVIRONMENT}.corti.app/v2/tools/coding/`
+
+The existing auth helper already follows the required bearer-token + tenant-header pattern.
+
+Current rule:
+
+> **Test tenant entitlement once. If it works and implementation remains tiny, codes can appear on the already-produced note or be mentioned in the close with essentially no new demo beat. If it fails or expands, drop it immediately.**
+
+Four areas already satisfy the stated minimum.
+
+For Danish coding, current corrected documentation evidence supports **SNOMED CT-DK**; do not improvise ICD-10-DK as a documented Corti system.
+
+### Agentic-framework depth
+
+Code inspection indicates seven Corti-agent integrations/uses.
+
+Do not show seven agents individually. Mention agentic depth concisely and bank the exact architecture for Q&A/X-ray evidence.
+
+---
+
+## 8. Rubric coverage check
+
+| Criterion | Current demonstration strategy | Confidence before rehearsal |
 |---|---|---|
-| Clinical relevance | Beats 3 + 5; a practising physician on the team **already uses this in real work** (`09_…` §4) | strong |
-| Use of Corti API | Beats 1, 2, 4 — **4 of 5 product areas**; see risk below | adequate, no margin |
-| Working prototype | The unbroken take is itself the proof | strong |
-| Insight & ambition | Beat 3 + §5 | strong |
-| Crowd voting | One patient, one story, no architecture slide | strong |
-
-### The one open risk
-Medical coding is **absent**, so coverage is exactly the stated minimum of four. Because dictation and batch speech-to-text both resolve to `/v2/interactions/`, a judge who collapses them reads coverage as three. See `14_…` §3. This is a decision to take deliberately, not to discover on stage.
-
-### Under-claimed asset
-**Seven distinct Corti agents** are running. "Best use of the agentic framework" is a named bonus superlative. Beat 2 should say the word *agents* out loud — currently the deck would leave the team's strongest rubric-specific asset invisible.
+| Clinical relevance | safety/context beat + handoff/clinical workflow grounding | strong conceptually; case requires Frank sign-off |
+| Corti API | four mapped product areas; optional bounded fifth-area coding test | strong code mapping; final live path still to verify |
+| Working prototype | one unbroken application flow | substantial build evidence; stage path not yet rehearsed |
+| Insight / ambition | context survives across encounter; action-aware safety beat; selective silence/missing checks | strong |
+| Crowd voting | one patient, one story, minimal architecture narration | strong hypothesis; rehearsal needed |
 
 ---
 
-## 7. Speaking allocation (four people, ~5 minutes)
+## 9. Speaking allocation — still not fully grounded
 
-Deliberately uneven. Four equal quarters would fragment a story whose entire point is continuity.
+Earlier candidate allocation:
 
-| Person | Owns | Why |
-|---|---|---|
-| **Frank** | The problem beat + narrating the demo | He is the clinician and he uses it in practice. His credibility is the team's scarcest asset — spend it where judges are deciding whether to believe the work is real. |
-| **Daniel** | The "beyond a scribe" beat + close | Context architecture is exactly the argument in §5. |
-| **Mihai** | Driving the demo machine | Frees Frank to speak. Also the natural voice for any UX point, given the Lovable/UI stream. |
-| **Fourth teammate** | *unassigned — stream still ungrounded* | `00_…` warns against inventing this. Must be resolved with the team. |
+- Frank: clinical/problem credibility + possibly demo narration;
+- Daniel: context/beyond-scribe synthesis + close;
+- Mihai: possible demo-driving/UX role;
+- fourth teammate: **still ungrounded in the shared evidence**.
 
-Everyone introduces themselves; only two people carry narration. **Unresolved: whether Corti requires more equal speaking time.**
+Do not freeze this table by inference.
 
----
+Every person needs a ~5–6 second introduction, but narration can remain deliberately uneven to preserve one continuous story.
 
-## 8. Failure plan
-
-`viden/17` already specifies it: if the hall's wifi or Corti dies, **Demo mode** runs the whole flow, and **the QR is genuine** — it is pure client-side CP437 and works offline. `viden/15` step 66 says rehearse the switch once so it is not first attempted on stage.
-
-Two additions from this verification:
-
-- **`npm run build` was broken** at `b1f816b`; a verified four-line fix is held in `fix-tsc-build.patch` (`14_…` §4). Apply it before building any demo bundle.
-- **The English template ships unvalidated** by Frank's own note. If the demo runs Danish, this never surfaces. **Recommend demoing in Danish** and mentioning English as breadth rather than showing it.
+Resolve with the actual team before baseline freeze.
 
 ---
 
-## 9. What must NOT be claimed
+## 10. Failure plan
 
-Directly from `14_…` §6 — none of this was observed:
+### Preferred input
 
-- **the hospital EPJ integration.** The QR is real; the receiving tablet is an integration assumption. Say *"scans into the receiving system"*, never *"integrated with Epic."*
-- Latency or accuracy figures as independently verified — they are Frank's own measurements. Attribute them: *"we measured…"*
-- Dispatch/112 ingestion. Frank does **not** have audio contact with the 112 call (`09_…` §1). It is future scope.
-- Longitudinal patient history. Explicitly blocked by data access today (`09_…` §7).
+**Preloaded/synthetic approved audio** unless live microphone rehearsal proves safer/better.
 
-The honest and stronger framing for all four: **"here is the boundary we close today, and here is the next one."**
+### Connected path fails
+
+Use the verified **interactive zero-backend demo-only mode**.
+
+Current working build invocation at the last inspected Frank commit:
+
+`VITE_DEMO_ONLY=1 npx vite build`
+
+Known issue: documentation names `npm run build:demo`, but that script does not exist at the inspected commit.
+
+### Display/application catastrophe
+
+Have a short recording of the already-verified intended path as last resort.
+
+### Critical rehearsal requirement
+
+The fallback switch is not a fallback until someone has rehearsed it.
 
 ---
 
-## 10. Open decisions
+## 11. Presentation surface — phone is optional embodiment
 
-1. **Medical coding** — build it for margin, or present four areas confidently?
-2. **The fourth teammate** — name, stream, and speaking role.
-3. **Who submits**, and what the submitted repository actually contains.
-4. **Frank's sign-off** on every `[FRANK]` clinical specific in beat 3.
-5. **Rehearsed timing.** Five minutes is short enough that this spine is a hypothesis until it has been run with a stopwatch.
+The implementation is a **mobile-format web app**, not a native/PWA phone package.
+
+Therefore:
+
+- laptop browser can run the real application;
+- phone browser can run the real application;
+- scrcpy can still create a compelling "this is what the clinician holds" stage experience;
+- but phone mirroring adds moving parts without adding functional fidelity.
+
+Choose after rehearsal.
+
+If phone is used with microphone capture, test the exact handset/HTTPS path because the implementation has a hard 16 kHz guard and browser secure-context requirements.
+
+---
+
+## 12. What must NOT be claimed
+
+Without new evidence, do not claim:
+
+- production Epic/EHR integration;
+- production 112/dispatch ingestion;
+- complete dispatch-to-hospital technical integration;
+- longitudinal patient-history integration;
+- independently reproduced live Corti latency/accuracy figures;
+- medical coding already implemented;
+- keyterms already implemented;
+- phone mirroring is required for authenticity/fidelity;
+- the final case/timing/speaking flow is already frozen.
+
+Use the stronger boundary language:
+
+> **Here is the boundary we can close and demonstrate today; here is the next boundary this architecture can reach.**
+
+---
+
+## 13. Remaining decisions before this becomes the baseline
+
+1. Check current Frank repository HEAD against last directly verified `b1f816b`.
+2. Run the exact intended connected path on the intended presentation environment.
+3. Rehearse the interactive demo-only fallback switch.
+4. Choose laptop browser vs phone browser/mirroring from rehearsal evidence.
+5. Lock exact synthetic case + Frank sign-off.
+6. Resolve Mihai/fourth teammate + speaker/driver roles.
+7. Stopwatch-rehearse both ~180s and ~135s demo cuts.
+8. Optionally make one medical-coding entitlement test; implement only if it stays tiny.
+9. Record exact baseline commit/reference(s).
+10. Only then freeze the spine and unblock `NIGHT_RUN.md` optimization.
