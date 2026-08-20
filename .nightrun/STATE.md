@@ -2,170 +2,423 @@
 
 blocked: PIPELINE_BASELINE_NOT_FROZEN
 iteration: 0
-last_updated: 2026-08-21T00:05:00+02:00
+last_updated: 2026-08-21T00:47:00+02:00
 baseline_commit: NOT_FROZEN
-current_context_branch: presentation-context-20260820
-current_context_head_at_audit_start: fe0e229092fcc7037c232e79b1b9190430f45d89
+current_context_branch: presentation-consolidation-20260821
+current_consolidation_base_main: f9d9b221e74dea22463948864311cb8a172cc04f
+current_context_head_before_state_update: 4858cbf476db36fd6fa4cd184171abc748f268f1
 target: NONE
-result: WAITING_FOR_PIPELINE_BASELINE
+result: WAITING_FOR_EXACT_BASELINE_FREEZE
 
-## Current compressed project model
+## Purpose of this file
 
-This file is the living synthesis layer consumed by every overnight iteration. It is intentionally present **before activation** so that the shape expected from later iterations is concrete rather than merely described in `NIGHT_RUN.md`.
+This file is the **cumulative cross-iteration synthesis layer** consumed by the overnight runner.
 
-The underlying code, runtime behavior, source evidence, tests, clinical material, and Git history remain authoritative. This state file summarizes them; it never outranks them.
+It is the "icing / all-encompassing layer" over the underlying evidence, not a replacement for that evidence.
 
-## Frozen pipeline / demo spine
+Authority remains:
 
-**NOT FROZEN.**
+`current code + git history + executed tests/runtime + official sources + first-hand team/clinical evidence`
 
-Current working map lives in:
+This state compresses their current relationship so each night-run iteration can improve the same project instead of reconstructing or redefining it.
 
-`context/11_PIPELINE_BASELINE_WORKING_MAP.md`
+Canonical current synthesis:
 
-Do not infer a final pipeline from this placeholder. The team picture is still being reconciled.
+`context/19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md`
+
+## Activation status
+
+**BLOCKED — CORRECTLY.**
+
+The project picture is now substantially reconciled, but the exact baseline that the night run is allowed to optimize has not yet been frozen.
+
+Do not set `blocked: NONE` until the final demo/presentation baseline has:
+
+1. an exact implementation commit/reference;
+2. an exact connected demo path;
+3. an exact rehearsed fallback path;
+4. an exact approved clinical case;
+5. an exact presentation surface choice;
+6. an exact speaker/timing choreography;
+7. a recorded baseline SHA/reference.
+
+## Current high-level project model
+
+The strongest defensible whole-project direction is:
+
+> **preserve clinically relevant context across an acute encounter so later documentation and assistance can use what happened earlier rather than treating the latest sentence as the entire situation.**
+
+Current implemented center of gravity is Frank's mobile-format prehospital web application.
+
+Broader team context reaches conceptually from dispatch/pre-arrival context through ambulance encounter and receiving-side continuity, but the entire continuum is **not** implemented end-to-end.
+
+The audience-facing experience should remain much simpler than the evidence/context architecture underneath it.
+
+## Implementation reference
+
+Last directly executed/inspected Frank repository commit in the shared evidence:
+
+`Clinlog/hackathon-ppj @ b1f816b`
+
+Current status of Frank repo **after** that commit is not independently available to ChatGPT's GitHub connector in this consolidation pass; before baseline freeze, Claude Code/local Git should check whether Frank has pushed newer commits and, if so, re-run only the presentation-critical verification that changed.
 
 ## Capability truth map
 
-### RUNNING
+### RUNNING / LIVE-OBSERVED FOR FINAL DEMO
 
-- None promoted here yet. Runtime verification for the final demonstrable pipeline has not been completed.
+**Not yet promoted.**
 
-### BUILT
+The cross-agent verification environment did not make the final live Corti-connected demo call because live credentials/configuration were not present in that verification environment.
 
-- None promoted here yet without sufficient bounded verification.
+This is an evidence boundary, not a claim that Frank's deployed application cannot call Corti.
 
-### PARTIAL
+### BUILT / DIRECTLY EXECUTION-EVIDENCED
 
-- Frank's supplied hackathon codebase contains substantial implementation material, but the complete presentation-relevant runtime path has not yet been traced and executed end-to-end by this presentation effort.
+At `b1f816b`, Claude Code established:
 
-### DESIGNED / CANDIDATE
+- 251 tracked files;
+- 13 edge-function directories;
+- 9 application screens;
+- **159/159 Vitest tests across 16 files passed**;
+- anonymisation pattern-net tests passed;
+- `npx vite build` succeeded;
+- an initially broken full `npm run build` path was diagnosed;
+- a four-line local correction made `tsc -b` and the full build pass while preserving 159/159 tests;
+- that correction was not pushed across Frank's implementation ownership boundary;
+- an **interactive zero-backend demo-only mode** exists and builds;
+- batch transcription, stateful ambient streaming and stateless real-time audio-bridge transcription paths exist in code;
+- deterministic safety/omission logic, ambient/event-log functionality, structured-note model, QR, guideline/retrieval, audio and paediatric-dosing implementation areas materially exist.
 
-- Broader acute-care/context-continuity interventions remain candidates until reconciled against actual implementation and team intent.
+### PARTIAL / FINAL CONNECTED PATH NOT YET VERIFIED
 
-### EXTERNAL
+- exact live Corti-connected start-to-finish demo scenario;
+- deployed Supabase/service behavior under stage conditions;
+- exact QR/receiving-side handoff manifestation used in the final demo;
+- current Frank-repo state beyond `b1f816b`;
+- any optional new medical-coding addition;
+- any keyterms addition;
+- final X-ray/presentation overlay implementation;
+- measured end-to-end timing.
 
-- Direct production EHR/Epic access, dispatch infrastructure, receiving-hospital infrastructure, and other deployment boundaries remain external unless explicit implementation evidence changes this.
+### DESIGNED / CANDIDATE PRESENTATION LOGIC
 
-### UNKNOWN
+- one continuous encounter rather than a feature tour;
+- preloaded/synthetic approved audio as safer default input unless live microphone wins in rehearsal;
+- safety/context beat as the strongest beyond-scribe moment;
+- one short X-ray overlay on that beat, replacing narration rather than adding a detour;
+- structured note and handoff output after the encounter;
+- 180-second primary demo cut + 135-second compressed cut;
+- phone browser or laptop browser chosen by rehearsal evidence, not fidelity assumptions.
 
-- Exact final four-of-five Corti product-area coverage on the live demo path.
-- Exact best five-minute demonstrable spine.
-- Full fourth-teammate contribution map.
-- Complete runtime status of every presentation-critical Frank/Mihai/team capability.
+### EXTERNAL / FUTURE BOUNDARIES
 
-## Corti judging / API coverage
+Unless new code/runtime evidence changes them:
 
-Source-reported Corti briefing is preserved in:
+- production 112/dispatch integration;
+- production Epic/EHR integration;
+- production hospital infrastructure integration;
+- longitudinal patient-history access;
+- ceiling microphone / ambulance ambient hardware not actually used in the final demo;
+- other deployment/institutional integrations discussed as continuation paths.
 
-`context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
+### HUMAN / TEAM UNKNOWN
 
-Current evidence status before baseline freeze:
+- Mihai's complete current contribution/workstream;
+- fourth teammate identity/workstream in this shared evidence set;
+- fourth teammate speaking role;
+- final speaker allocation;
+- who physically drives the demo;
+- who owns final submission action;
+- Frank's sign-off on exact synthetic case/clinical details.
 
-- Clinical relevance: **strong source/workflow grounding, final demo mapping not frozen**.
-- Corti API breadth: **not yet proven on one end-to-end runtime path**.
-- Working prototype: **substantial implementation exists; final live path not yet independently verified by this presentation effort**.
-- Insight / ambition beyond ordinary ambient scribe: **many candidate/contextual layers exist; final truthful expression not frozen**.
-- Crowd comprehension: **presentation architecture still being distilled**.
+These must not be invented by an overnight agent.
 
-## Best known five-minute demo path
+## From-scratch provenance
 
-**NOT YET FROZEN.**
+**STRONGLY VERIFIED FOR FRANK'S REPOSITORY.**
 
-Candidate field remains:
+Claude Code inspected the full unshallowed `Clinlog/hackathon-ppj` history.
 
-`incoming/pre-arrival context -> live encounter speech/context -> structured clinical understanding/documentation -> relevant contextual support where actually implemented -> handoff/continuity output`
+Observed:
 
-This is not yet a presentation claim.
+- 2026-08-18 → 2026-08-19: 12 commits; documentation/PDF material plus `.gitignore`; no `.ts`, `.tsx`, `.mjs`, `.js`, `.py`, `.sql`, `.json` application-code files;
+- 2026-08-20 ~11:14 → 21:17: 27 commits containing implementation work.
 
-## Fallback / backup demo path
+Guard:
 
-NOT YET ESTABLISHED.
+> Do not merge historical pre-hackathon application code from other repositories into the submitted implementation and then rely on this provenance conclusion.
 
-## Presentation-safe claims currently supported at source level
+## Product / presentation surface truth
 
-- Frank describes a real prehospital workflow in which the physician receives evolving 112-derived context as text rather than direct call audio.
-- Frank reports already using dictation/structured output in practice and reports a pre-arrival handoff benefit.
-- Corti's spoken briefing, as supplied by Daniel, describes a roughly five-minute demo plus Q&A and requires at least four of five named product areas.
-- The presentation/context repository contains a deliberate evidence-status discipline and active multi-agent handoff model.
+The current implementation is a **mobile-format Vite/React web app**, not a native/PWA handset package.
 
-These are source-level/project-process claims; implementation-specific claims still require code/runtime evidence.
+Code inspection found:
 
-## Claims that must not be made yet
+- no PWA manifest;
+- no service worker;
+- no Capacitor/Cordova/React-Native wrapper.
 
-- That the entire candidate acute-care continuum is implemented.
-- That any named README/module/folder proves runtime behavior.
-- That all four required Corti product areas have been demonstrated end-to-end.
-- That direct Epic/EHR/112 production integrations exist.
-- That the night run has optimized the project already.
-- That the final pipeline baseline has been frozen.
+Therefore:
 
-## Current contradictions / uncertainty
+- phone browser can show the real app;
+- laptop browser can show the same app bundle/backend path;
+- scrcpy/phone mirroring is a presentation embodiment choice, not a functional-fidelity requirement;
+- choose by stage reliability and audience value.
 
-- Some older Claude-web research used a B-response target of 25 minutes / historical ~37-minute framing. Current Region H material establishes a 30-minute B target; old 25/37 framing must not be presented as current.
-- Claude-generated operating doctrine and Frank's code need continued reconciliation; polished documentation must not override contrary runtime/code behavior.
-- The complete Frank-code runtime/demoability audit is still unfinished.
+## Audio / microphone truth
 
-## Latest bounded delta
+Current code-evidenced stage risks:
 
-This is **iteration 0 / pre-night-run preparation**, not an overnight optimization iteration.
+- hard 16 kHz sample-rate guard;
+- browser `getUserMedia` secure-context requirement;
+- phone-over-LAN-IP can fail secure-context rules;
+- Safari/iOS is a higher-risk capture path in the inspected implementation context.
 
-Changes made to night-run infrastructure before activation:
+Corti's supplied briefing explicitly allows preloaded audio.
 
-- root `NIGHT_RUN.md` exists and defines one bounded iteration;
-- `.nightrun/STATE.md` exists and now provides the actual cumulative-state schema;
-- the night run remains blocked until the pipeline baseline is frozen;
-- the known-good PowerShell sequence is being preserved in GitHub as provenance/source material.
+Current default recommendation:
 
-## Evidence produced / referenced
+> **use preloaded/synthetic approved audio with the real application unless live capture has been rehearsed enough to justify the additional failure surface.**
 
-- `NIGHT_RUN.md`
-- `context/10_NIGHTRUN_DESIGN_CONTRACT.md`
-- `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-- user-supplied `4.txt` known-good PowerShell sequence (original upload SHA-256 recorded separately)
+## Interactive fallback truth
 
-## Files changed in latest pre-run infrastructure correction
+A genuine zero-backend demo-only application mode exists.
 
-- `.nightrun/STATE.md`
+Verified build invocation at the inspected commit:
 
-## Regression / demo risks currently visible
+`VITE_DEMO_ONLY=1 npx vite build`
 
-- Activating the night run before baseline freeze could cause autonomous optimization to redefine rather than improve the project.
-- Agents reading `main` do not yet inherit all current branch context until PR #2 is merged and local clones are updated.
-- The final runtime/demo path is not yet proven.
+Known defect:
 
-## Highest-value remaining optimization frontier
+- documentation names `npm run build:demo`, but that script does not exist at the inspected commit.
 
-Not optimization yet: **finish the baseline truth map**.
+Current fallback hierarchy:
 
-Specifically:
+1. verified connected/live application path;
+2. rehearsed interactive zero-backend demo path;
+3. short recording only for catastrophic stage/display failure.
 
-1. finish the assistant/action truth audit;
-2. reconcile the newly supplied Claude-web acute-system research with primary/current sources;
-3. complete the presentation-relevant implementation/runtime trace;
-4. map all teammate contributions;
-5. prove Corti product-area coverage;
-6. freeze one five-minute demo spine.
+Highest-value reliability task:
 
-## Exact next recommended bounded action
+> rehearse the transition into demo-only mode before depending on it.
 
-Continue the truth audit and implementation-evidence reconciliation. Do **not** set `blocked: NONE` yet.
+## Corti product-area coverage
 
-## Human/team decision required
+Supplied briefing names at least four of five:
 
-None required merely to continue evidence gathering.
+1. dictation;
+2. speech-to-text;
+3. ambient speech-to-text;
+4. text generation;
+5. medical coding.
 
-A human/team decision **will** be required before baseline freeze if multiple truthful demo spines remain viable.
+Current verified implementation maps the first four.
+
+Three distinct transcription surfaces are present in code:
+
+- batch transcript path;
+- stateful ambient `/streams`;
+- stateless real-time audio-bridge `/transcribe`.
+
+### Medical coding — latest consolidated status
+
+Medical coding is **not present in the verified application tree**.
+
+Merged PR #7 directly corrected the earlier availability assumption using current Corti documentation:
+
+`POST https://api.${ENVIRONMENT}.corti.app/v2/tools/coding/`
+
+The current stateless v2 surface is documented without the legacy per-customer/tuning wording previously misapplied to it.
+
+Existing Frank auth infrastructure already uses the needed bearer-token / tenant-header pattern.
+
+Environment truth still required:
+
+- test whether the hackathon tenant is entitled.
+
+Decision rule:
+
+> **Optional fifth-area gain, never a blocker. Make one bounded entitlement test. If it works and implementation stays tiny, it may be worth adding after the core demo is secure. If it fails or expands, abandon immediately.**
+
+Current Danish coding wording from the corrected source:
+
+**SNOMED CT-DK.**
+
+Do not repeat an unsupported ICD-10-DK claim.
+
+## Keyterms
+
+Official Corti documentation supports keyterms.
+
+Verified current build contains no keyterm/vocabulary/bias configuration.
+
+Status:
+
+**POSSIBLE LOW-COST OPTIMIZATION / NOT IMPLEMENTED.**
+
+Do not spend core rehearsal time on it. Only test after the baseline demo and fallback work reliably.
+
+## Agentic framework
+
+Code inspection indicates seven Corti-agent uses.
+
+Presentation rule:
+
+> demonstrate the clinical consequence, not seven implementation boxes.
+
+Use agentic depth as:
+
+- one concise clause where useful;
+- optional X-ray/architecture evidence;
+- prepared Q&A depth.
+
+## Best known five-minute presentation spine
+
+**CANDIDATE — NOT FROZEN.**
+
+Current semantic sequence:
+
+`one encounter begins`
+`-> speech/context accumulates`
+`-> contextual question/retrieval if time permits`
+`-> earlier fact becomes relevant to later planned action`
+`-> safety/context alert appears before action`
+`-> encounter stops`
+`-> structured clinical note appears`
+`-> handoff/QR manifestation`
+
+The project meaning is weakened by restarting separate feature demos because the through-line is continuity of context.
+
+### Strongest current demo beat
+
+The safety/context moment is currently load-bearing:
+
+> a fact stated earlier remains available and becomes relevant to a later planned drug/action.
+
+Presentation-safe generic line:
+
+> **A scribe records what you said. This can check what you said earlier against what you are about to do now.**
+
+Exact clinical pairing must be Frank-approved and guaranteed by implemented data/rules.
+
+## `missing` rule wording
+
+Presentation-safe:
+
+> **The rule engine checks for what's missing, not just what's wrong.**
+
+Do **not** claim Frank intentionally encoded Daniel's broader context-architecture doctrine unless Frank confirms that intent.
+
+Internal conceptual resonance is allowed; causal provenance is not invented.
+
+## X-ray layer
+
+Current strongest use:
+
+- exactly one short X-ray moment;
+- likely on the safety beat;
+- same product state remains visible/continuous;
+- overlay reveals why a fact from earlier matters now;
+- <= ~20 seconds;
+- replaces narration rather than adding a new presentation branch.
+
+The richer X-ray architecture remains valid context but is not automatically part of the five-minute run.
+
+## Timing
+
+Do not average competing interpretations.
+
+Rehearse:
+
+- **primary:** ~180-second continuous demo segment within ~5-minute presentation;
+- **compressed:** ~135-second demo cut, dropping lower-priority question/retrieval content before safety/note/handoff.
+
+All durations remain estimates until stopwatch-measured.
+
+## Presentation-safe claims currently supported
+
+- Frank's hackathon repository has a git-verifiable from-scratch implementation timeline.
+- The current app is a mobile-format prehospital web application.
+- 159/159 tests passed in Claude Code's direct verification at `b1f816b`.
+- substantial deterministic implementation layers are real at that commit.
+- three distinct Corti transcription modes are represented in code.
+- an interactive zero-backend demo-only mode exists.
+- safety logic checks across encounter facts and includes missing-information findings.
+- the application can structure encounter material into a clinical note.
+- the supplied Corti briefing requires at least four of five product areas and permits preloaded audio.
+- current Corti docs expose a v2 medical-coding surface; tenant entitlement is a test, not an assumption.
+
+## Claims still prohibited without stronger evidence
+
+- entire dispatch -> ambulance -> hospital continuum is integrated end-to-end;
+- production Epic/EHR integration exists;
+- production 112 audio/data integration exists;
+- final live Corti-connected stage path has already been verified by this synthesis layer;
+- phone mirroring is required for product fidelity;
+- keyterms are implemented;
+- medical coding is implemented;
+- hackathon tenant coding entitlement definitely exists;
+- final speaker allocation is known;
+- final presentation spine is frozen;
+- night run has already optimized the project.
+
+## Superseded state from previous version
+
+The previous `.nightrun/STATE.md` said:
+
+- no BUILT capabilities promoted;
+- four-of-five coverage unknown;
+- fallback not established;
+- runtime/demoability audit broadly unfinished;
+- main did not yet inherit PR #2.
+
+Those statements are now superseded by repository evidence.
+
+This file replaces them.
+
+## Remaining baseline-freeze gates
+
+1. **Check Frank's current HEAD** against last verified `b1f816b`.
+2. **Run the exact intended connected demo path** on the intended presentation machine/environment.
+3. **Rehearse the interactive demo-only fallback switch.**
+4. **Choose laptop browser vs phone browser/mirroring from rehearsal evidence.**
+5. **Lock the synthetic clinical case and Frank's clinical sign-off.**
+6. **Resolve Mihai + fourth teammate + speaking/driver reality.**
+7. **Stopwatch-rehearse 180s and 135s cuts.**
+8. **Optionally make one coding-entitlement test** after core path stability; add coding only if it remains tiny.
+9. **Record exact baseline commit/reference(s).**
+10. Update this file to `blocked: NONE` only after 1–9 yield one explicit baseline.
+
+## Highest-value next bounded action
+
+Not autonomous optimization yet.
+
+> **Establish the exact executable presentation baseline by checking current Frank HEAD and rehearsing the intended connected path + interactive fallback.**
+
+That is now higher value than additional abstract architecture.
+
+## Human/team decision required before freeze
+
+Yes:
+
+- exact clinical demo case / Frank sign-off;
+- team member speaking/driver roles;
+- presentation surface if both phone and laptop are technically viable;
+- whether optional medical coding is worth the bounded one-test/addition window.
 
 ## Activation note
 
-The PowerShell driver is structurally ready to consume root-level `NIGHT_RUN.md`, but the night run must not begin optimizing product/presentation code until the current pipeline has been created/reconciled and the baseline commit is recorded here.
+The proven PowerShell driver and root `NIGHT_RUN.md` are structurally ready.
 
-When ready, update at minimum:
+When baseline freeze is real, update at minimum:
 
 - `blocked: NONE`
-- `baseline_commit: <exact commit SHA>`
-- `target: <current highest-priority presentation-critical target or AUTO_SELECT_FROM_BASELINE>`
-- the frozen pipeline/demo spine and capability truth map above
+- `baseline_commit: <exact SHA or explicitly recorded multi-repo baseline>`
+- `target: <highest-priority presentation-critical optimization or AUTO_SELECT_FROM_BASELINE>`
+- the frozen executable demo spine;
+- verified fallback command/path;
+- exact case/timing/surface assumptions.
 
-Then the proven PowerShell driver can start invoking exactly one bounded iteration at a time.
+Only then should the night run iterate:
+
+`inspect -> choose one weakness -> make smallest safe improvement -> execute/verify -> update STATE -> commit -> stop`.
