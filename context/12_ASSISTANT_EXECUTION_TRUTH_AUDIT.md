@@ -2,345 +2,274 @@
 
 ## Purpose
 
-This file audits substantive commitments made by ChatGPT during the presentation-context build against what **actually exists or has actually been verified**.
-
-The purpose is not to defend prior wording. The purpose is to prevent an assistant statement such as “I’m doing X now” or “I pushed Y” from silently becoming project truth when the action was partial, interrupted, stale, or never completed.
+Audit substantive ChatGPT commitments against what **actually exists or has actually been verified**. Assistant wording is not completion evidence.
 
 ## Audit boundary
 
-ChatGPT cannot export the entire conversation UI transcript byte-for-byte from inaccessible/hidden history on demand. This audit therefore covers:
+ChatGPT cannot export inaccessible/hidden conversation UI history byte-for-byte on demand. This audit covers the substantive commitments available in current conversation context/handoff, user-supplied files, GitHub history/state, and tool/runtime evidence. If an older message later surfaces, add it rather than assuming it was covered.
 
-- substantive commitments available in the current conversation context;
-- preserved conversation handoff/context;
-- user-supplied files and screenshots;
-- GitHub commits/files/PR state;
-- tool/runtime evidence generated during this effort.
+Statuses:
 
-If an older message later surfaces, add it to this audit rather than assuming it was covered.
-
-Status vocabulary:
-
-- **DONE** — the claimed action can be directly evidenced now.
-- **PARTIAL** — meaningful work occurred, but the wording implied more completeness than actuality.
-- **CORRECTED** — an earlier statement became stale/incorrect and has since been fixed.
-- **NOT YET DONE** — promised/intended work remains outstanding.
-- **ONGOING** — a standing process rule rather than a finite action.
+- **DONE** — directly evidenced now.
+- **PARTIAL** — meaningful work occurred, but earlier wording implied more completeness.
+- **CORRECTED** — earlier statement/state became wrong or stale and has been repaired/qualified.
+- **NOT YET DONE** — promised/required work remains.
+- **ONGOING** — standing process rule.
 
 ---
 
-## 1. Establish a GitHub source-of-truth layer
+## 1. GitHub source-of-truth layer
 
-**Assistant commitment:** preserve stable synthesis in `danielhfpott/pipelinepresentation` rather than leaving it only in chat.
+**Commitment:** preserve stable synthesis in `danielhfpott/pipelinepresentation` rather than chat only.
 
 **Status: DONE / ONGOING.**
 
-Evidence includes:
+Evidence: `context/00_READ_ME_FIRST.md`, `02_CONTEXT_ARCHITECTURE_INFERENCE_RULES.md`, `03_LIVING_SYNTHESIS.md`, `04_INCOMING_SOURCE_MANIFEST.md`, `05_SOURCE_OF_TRUTH_PROTOCOL.md`, and later source/reconciliation files.
 
-- `context/00_READ_ME_FIRST.md`
-- `context/02_CONTEXT_ARCHITECTURE_INFERENCE_RULES.md`
-- `context/03_LIVING_SYNTHESIS.md`
-- `context/04_INCOMING_SOURCE_MANIFEST.md`
-- `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
-- later source/reconciliation files.
-
-Important current limitation: newer work is on `presentation-context-20260820` and is not yet merged into `main` at the time of this audit. Therefore an agent reading only local/remote `main` may still have stale context.
-
-PR #2 exists to synchronize the latest layer and is now mergeable, but it is **not merged yet**.
+Current limitation: latest work remains on `presentation-context-20260820`; `main` is behind until PR #2 is merged and local clones update.
 
 ---
 
-## 2. Preserve anti-scope-creep / inference discipline
+## 2. Anti-scope-creep / inference discipline
 
-**Assistant commitment:** filenames, headings, repo names, class/function names, and polished AI prose must not be treated as semantic or implementation truth by themselves.
+**Commitment:** names/titles/README prose/AI confidence do not prove semantics or runtime.
 
 **Status: DONE.**
 
-Evidence:
-
-- `context/02_CONTEXT_ARCHITECTURE_INFERENCE_RULES.md`
-- `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
-- the same distinction is propagated into `NIGHT_RUN.md` and working-map material.
+Evidence: `02_CONTEXT_ARCHITECTURE_INFERENCE_RULES.md`, `05_SOURCE_OF_TRUTH_PROTOCOL.md`, `NIGHT_RUN.md`.
 
 ---
 
-## 3. Preserve the living project/presentation synthesis
+## 3. Living broad synthesis before pitch lock
 
-**Assistant commitment:** maintain a broad working synthesis instead of prematurely locking a pitch.
+**Commitment:** fill/reconcile the field before freezing the presentation thesis.
 
 **Status: DONE / ONGOING.**
 
-Evidence:
+Evidence: `03_LIVING_SYNTHESIS.md`, `11_PIPELINE_BASELINE_WORKING_MAP.md`.
 
-- `context/03_LIVING_SYNTHESIS.md`
-- `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-
-The baseline remains intentionally **NOT FROZEN**.
+Baseline remains **NOT FROZEN**.
 
 ---
 
-## 4. Inspect Claude archive and Frank code archive, reconcile claims against code/runtime
+## 4. Claude archive + Frank code archive reconciliation
 
-**Assistant commitment:** “inspect both archives by contents, map claims -> code evidence -> likely demoability, then push only stable synthesis.”
+**Commitment:** inspect both archives by contents, map claims -> code evidence -> likely demoability, then push stable synthesis.
 
 **Status: PARTIAL.**
 
-What actually happened:
+Actually done:
 
-- `claudechatcontent.zip` was inspected structurally and its four files were identified.
-- `hackathon-ppj-main.zip` was inspected structurally and a large portion of its tree was enumerated.
-- README-level claims and several code-structure observations were preserved cautiously.
-- `context/05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md` and `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md` were created.
+- Claude archive structure/content inspected.
+- Frank archive structure substantially enumerated.
+- README/source-level observations preserved cautiously.
+- `05_TEAM_IMPLEMENTATION_EVIDENCE_FRANK.md` and `06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md` created.
 
-What has **not** yet been completed:
+Still not done:
 
-- complete source-level trace of the presentation-critical Frank pipeline;
-- end-to-end runtime execution of that pipeline by this presentation effort;
-- complete claims -> code -> runtime -> demoability matrix;
-- final verification of every Corti endpoint/product-area claim;
-- full reconciliation of silent fallback behavior and all Claude doctrine claims.
+- complete presentation-critical source trace;
+- complete end-to-end runtime execution;
+- claims -> code -> runtime -> demoability matrix;
+- final four-of-five Corti product-area proof;
+- full silent-fallback reconciliation.
 
-Therefore any earlier wording implying the archive/code reconciliation was “done” would be too strong.
+Any earlier wording implying this whole reconciliation was finished was too strong.
 
 ---
 
-## 5. Reconcile the Claude presentation-build material without making it canonical
+## 5. Claude presentation-build material
 
-**Assistant commitment:** preserve strong truth-discipline ideas but keep Claude’s polished presentation thesis/scope decisions provisional.
+**Commitment:** preserve strong truth-discipline mechanisms without making Claude’s polished scope/thesis canonical.
 
 **Status: DONE / ONGOING.**
 
-Evidence:
+Evidence: `06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`.
 
-- `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
-
-Byte-level duplicate check of the two `HACKATHON_TRUTH_DOCTRINE` files was actually performed and their duplicate status/hash preserved.
-
-New provenance clarification: surrounding Claude-web chats are part of the same contextual source cluster and should not be counted as independent corroboration of documents they helped produce.
+The two doctrine files were actually byte-compared and confirmed duplicates. Surrounding Claude-web chats are contextual formation/provenance, not independent corroboration.
 
 ---
 
-## 6. Preserve the fentanyl/contextual-assistance case as a design requirement, not implementation proof
+## 6. Fentanyl/contextual-assistance case
 
-**Assistant commitment:** store the case as evidence that isolated utterance interpretation can fail while not claiming the current system already solves it.
+**Commitment:** preserve as a concrete context-loss/design-requirement case, not proof current code solves it.
 
 **Status: DONE.**
 
-Evidence:
-
-- `context/07_CONTEXTUAL_CLINICAL_ASSISTANCE_CASE.md`
+Evidence: `07_CONTEXTUAL_CLINICAL_ASSISTANCE_CASE.md`.
 
 ---
 
-## 7. Preserve Corti’s spoken assignment/judging briefing and correct presentation duration
+## 7. Corti assignment/judging briefing + timing correction
 
-**Assistant commitment:** record the judging/API requirement and replace the older ~15-minute assumption with the supplied ~5-minute demo + Q&A format.
+**Commitment:** preserve spoken rubric/API requirements and replace stale ~15-minute presentation assumption with ~5-minute demo + Q&A.
 
 **Status: DONE.**
 
-Evidence:
+Evidence: `08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`, corrected `00_READ_ME_FIRST.md`, corrected `03_LIVING_SYNTHESIS.md`; repository search found no remaining `15-minute` string in current context branch.
 
-- `context/08_CORTI_ASSIGNMENT_AND_JUDGING_SOURCE.md`
-- `context/00_READ_ME_FIRST.md` corrected
-- `context/03_LIVING_SYNTHESIS.md` corrected
-- repository search at audit time found no remaining `15-minute` string in the current branch context.
-
-The briefing remains **source-reported spoken Corti guidance** unless/until an official written hackathon source is added.
+Still source-reported spoken guidance until official written material is supplied.
 
 ---
 
-## 8. Preserve Frank’s clinician-described current workflow and provenance
+## 8. Frank clinician workflow + provenance
 
-**Assistant commitment:** separate current workflow from possible extensions and correctly attribute the surrounding synthesis to Claude web chat when Daniel corrected the provenance.
+**Commitment:** separate current workflow from possible extensions and correctly attribute Claude-web synthesis after Daniel’s correction.
 
 **Status: DONE.**
 
-Evidence:
-
-- `context/09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`
-
-The file now explicitly distinguishes Daniel/Frank clinical statements from Claude’s secondary interpretation.
+Evidence: `09_CURRENT_PREHOSPITAL_WORKFLOW_SOURCE.md`.
 
 ---
 
-## 9. Create a night-run design contract before creating the executable loop
+## 9. Night-run design contract
 
-**Assistant commitment:** pipeline first, night-run optimization second; use the previously successful PowerShell pattern rather than inventing a new orchestration model.
+**Commitment:** pipeline first; night-run optimizer second; reuse proven PowerShell semantics rather than inventing a new mechanism.
 
 **Status: DONE.**
 
-Evidence:
-
-- `context/10_NIGHTRUN_DESIGN_CONTRACT.md`
+Evidence: `10_NIGHTRUN_DESIGN_CONTRACT.md`.
 
 ---
 
-## 10. Create root-level `NIGHT_RUN.md` and `.nightrun/STATE.md` required by the proven PowerShell loop
+## 10. Exact `NIGHT_RUN.md` + `.nightrun/STATE.md`
 
-**Assistant commitment:** create the exact filenames/paths expected by the launcher and block activation until the pipeline baseline is frozen.
+**Commitment:** create exact paths consumed by the proven driver and block activation until baseline freeze.
 
 **Status: DONE.**
 
-Evidence:
-
-- root `NIGHT_RUN.md`
-- `.nightrun/STATE.md`
-- blocker currently remains `PIPELINE_BASELINE_NOT_FROZEN`.
-
-This is structurally consistent with the supplied `4.txt` driver, which explicitly reads `NIGHT_RUN.md` and checks `.nightrun\STATE.md` for `blocked: (?!NONE)`.
+Evidence: root `NIGHT_RUN.md`; `.nightrun/STATE.md`; current blocker remains `PIPELINE_BASELINE_NOT_FROZEN`.
 
 ---
 
-## 11. Make `STATE.md` the all-encompassing cumulative synthesis layer
+## 11. `STATE.md` as all-encompassing cumulative synthesis layer
 
-**Assistant commitment:** “tighten `.nightrun/STATE.md` so it carries the whole picture.”
+**Commitment:** make state itself carry the living whole-picture synthesis.
 
 **Status: CORRECTED.**
 
-What actually happened first:
+Initial actuality: commit `a436d2e...` expanded instructions in **`NIGHT_RUN.md`**, but `.nightrun/STATE.md` itself remained a small placeholder. The assistant’s wording overstated completion.
 
-- commit `a436d2e...` expanded **`NIGHT_RUN.md` instructions** telling future iterations how to synthesize state;
-- the current `.nightrun/STATE.md` file itself remained a small activation placeholder.
-
-Therefore the assistant’s wording at that moment overstated the completed action.
-
-Correction:
-
-- `.nightrun/STATE.md` was subsequently expanded in commit `c608423...` into the actual cumulative state template, while preserving the machine-readable blocker line.
+Correction: commit `c608423...` expanded `.nightrun/STATE.md` into the actual cumulative-state template while preserving the machine-readable blocker.
 
 ---
 
-## 12. Preserve the exact known-good `4.txt` PowerShell driver
+## 12. Preserve exact known-good `4.txt`
 
-**Assistant commitment:** use the exact previously successful driver as the operational baseline rather than a remembered paraphrase.
+**Commitment:** use the prior successful PowerShell driver as exact source evidence.
 
 **Status: DONE.**
 
-The uploaded file was read directly from `/mnt/data/4.txt`.
-
-Verified original metadata:
+Original uploaded file verified directly:
 
 - size: `3172` bytes
 - SHA-256: `731033334d93d3dae7bb72991725a89494431d6f5aa8c4e2ee801143843d79d1`
 
-Preserved at:
+Preserved at `context/sources/KNOWN_GOOD_NIGHTRUN_DRIVER_4.txt`.
 
-`context/sources/KNOWN_GOOD_NIGHTRUN_DRIVER_4.txt`
-
-Important: its old voice-project working-directory path is source evidence, **not** the current hackathon path.
+Its old voice-project path is historical source content, not the current hackathon path.
 
 ---
 
-## 13. Build a working pipeline baseline map before night-run activation
+## 13. Pipeline baseline working map
 
-**Assistant commitment:** stop optimizing the night-run machinery and create the thing that the night run will later optimize.
+**Commitment:** stop treating night-run machinery as the immediate task and construct the actual team/project object it will later optimize.
 
 **Status: DONE / ONGOING.**
 
-Evidence:
+Evidence: `11_PIPELINE_BASELINE_WORKING_MAP.md`.
 
-- `context/11_PIPELINE_BASELINE_WORKING_MAP.md`
-
-The map is intentionally not frozen because full teammate/runtime/Corti coverage is still incomplete.
+Not frozen because teammate/runtime/Corti coverage remains incomplete.
 
 ---
 
-## 14. Treat GitHub as active agent context + judged artifact, not passive storage
+## 14. GitHub as active agent context + judged artifact
 
-**Assistant commitment:** make substantive project state durable so Codex/Claude Code can inherit it from the repo even after a minimal prompt.
+**Commitment:** make substantive project state durable enough for Codex/Claude Code to inherit from repo context.
 
 **Status: DONE / ONGOING.**
 
-Evidence:
+Evidence: expanded `05_SOURCE_OF_TRUTH_PROTOCOL.md`.
 
-- expanded `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
-
-Current reality caveat: this only works for agents reading the **current branch state**. Until PR #2 is merged and local clones pull/update, `main` remains behind the latest context branch.
+Caveat: this only works for agents reading current branch/files. `main` remains stale until synchronized.
 
 ---
 
-## 15. Open PR #2 to synchronize latest context into `main`
+## 15. PR #2 synchronization state
 
-**Assistant commitment:** open a PR rather than directly moving `main`.
+**Commitment:** open a PR rather than directly moving `main`.
 
-**Status: DONE.**
+**Status: DONE, PR NOT MERGED.**
 
-PR:
+PR #2: `Sync latest presentation context and night-run state`.
 
-`#2 Sync latest presentation context and night-run state`
+History:
 
-A branch-history divergence initially caused GitHub to report it as not mergeable. The assistant created a content-preserving merge ancestry commit `fe0e229...` bringing current `main` history into the context branch.
+- branch originally diverged from the prior `main` merge commit;
+- content-preserving ancestry merge commit `fe0e229...` brought current `main` history into the context branch;
+- branch comparison now shows `presentation-context-20260820` **ahead of `main` and 0 behind**, with current `main` as merge base;
+- GitHub’s PR `mergeable` field has changed between `true` and `false` while the branch was receiving new commits/recalculating.
 
-GitHub later recalculated PR #2 as **mergeable: true**.
+Current truth at the latest audit check:
 
-The PR remains **open and unmerged** at the time of this audit.
-
----
-
-## 16. “Everything substantive goes to GitHub” standing rule
-
-**Assistant commitment:** substantive synthesis/corrections/project-state changes should not remain only in chat.
-
-**Status: ONGOING, not complete by definition.**
-
-The rule is now documented in GitHub, but not every raw chat is or should be copied verbatim into the repository.
-
-What must be durable is the project-relevant state, provenance, contradiction, evidence, or decision that future humans/agents need.
-
-New Claude-web chat material supplied after the rule is being reconciled into separate source/research records rather than treated as chat-only context.
+- PR is **open**;
+- PR is **not merged**;
+- compare API: branch is ahead, 0 behind;
+- PR endpoint currently reports `mergeable: false`;
+- the reason for that PR-field value has **not yet been established**, so do not call it a content conflict or call it mergeable until rechecked/resolved.
 
 ---
 
-## 17. Verify newly supplied Claude-web acute-system research before promotion
+## 16. “Everything substantive goes to GitHub”
 
-**Assistant commitment:** verify public/quantitative claims against current/primary sources rather than copying Claude’s synthesis.
+**Commitment:** project-relevant synthesis/corrections/status/provenance should not remain only in chat.
+
+**Status: ONGOING.**
+
+Not every raw chat needs verbatim duplication. The durable requirement is the project-relevant state future humans/agents need.
+
+Manifest/provenance has been extended in `04_INCOMING_SOURCE_MANIFEST.md` and `13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`.
+
+---
+
+## 17. Verify Claude-web acute-system research before promotion
+
+**Commitment:** check public/quantitative claims against stronger/current sources.
 
 **Status: PARTIAL / ACTIVE.**
 
-Verified so far:
+Verified/corrected so far:
 
-- **Current Region H B-response service target:** 93% within **30 minutes**, supported by current 2026 Region H material. Therefore older `90% / 25 minutes` and `~37-minute 90th percentile` framing must not be presented as the current target.
-- **Stroke dispatcher recognition 66.2%:** supported by published Copenhagen/Region H research, but it is a historical study result, not a current 2026 rate.
-- **OHCA retrospective ML study:** 108,607 calls, 918 eligible OHCA calls; ML sensitivity 84.1% vs dispatcher 72.5%; ML PPV 20.9% vs dispatcher 33.0%; faster median recognition 44s vs 54s. This is historical retrospective evidence, not proof of present production performance.
-- **Important later nuance:** a randomized clinical trial found that live ML decision support did not significantly increase correct dispatcher OHCA recognition or change recognition time, despite the underlying model maintaining high sensitivity. This weakens any simplistic “AI already solved dispatch recognition” claim.
-- **Præhospitalsdatabasen 2023 Dansk Indeks registration quality:** A-C national 92.5%, Region H 82.3%, Region Sjælland 97.9%; D-F national 82.2%, Region H 61.5%, Region Midtjylland 98.7% — verified from the report.
-- **24-hour return indicator after scene discharge:** exists in Præhospitalsdatabasen and measures renewed 112 contact within 24h with A/B response leading to hospital transport — verified.
-- **Region Østdanmark:** Region Hovedstaden and Region Sjælland merge 1 January 2027 — verified from official Region H/Region Østdanmark material.
+- current Region H B-response target = **93% within 30 minutes**; older 25-minute/~37-minute framing is not current;
+- Copenhagen stroke recognition 66.2% = verified historical study result, not a current 2026 rate;
+- retrospective OHCA study metrics verified, including ML sensitivity 84.1% vs dispatcher 72.5% and lower ML PPV 20.9% vs dispatcher 33.0%;
+- later randomized trial adds critical nuance: live ML support did not significantly improve dispatcher correct recognition/time;
+- Præhospitalsdatabasen 2023 Dansk Indeks registration figures verified: A-C national 92.5%, Region H 82.3%, Sjælland 97.9%; D-F national 82.2%, Region H 61.5%, Midtjylland 98.7%;
+- 24-hour renewed-contact-after-scene-discharge indicator verified;
+- Region Østdanmark merger on 1 Jan 2027 verified.
 
-Still unverified or insufficiently reconciled from the newly pasted Claude chat:
+Important wording corrections are preserved in `13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`.
 
-- exact current 1813 call volumes/wait/abandonment figures;
-- the claim that the citizen pre-112/1813 decision is literally “nothing is measured here at all”;
-- all details of the exact Dansk Indeks serial-scan workflow as described in the Claude prose;
-- current Logis coverage percentage and its presentation significance;
-- `unclear problem` 28.8% interpretation and Claude’s stronger claim that this equals a vocabulary gap;
-- PPJ/ED handoff timing claims and the phrase “the note loses the race to the patient”;
-- the claim that the call-to-note seam is institutionally “unowned”;
-- the claim that Region H is “fastest in the country” in the exact comparison relevant to the pitch;
-- any claim that the 2027 merger necessarily forces two particular triage instruments to merge in the exact way Claude stated.
-
-These remain source hypotheses until verified.
+Still unverified: several 1813/Logis/handover/“unowned seam”/causal-vocabulary-gap/current-ranking claims from Claude’s research prose.
 
 ---
 
-## 18. Final presentation/deck creation
+## 18. Final presentation artifact
 
-**Assistant commitment/goal:** eventually create the actual polished presentation artifact, not only Markdown.
+**Goal:** actual polished judged presentation/demo artifact, not only Markdown.
 
 **Status: NOT YET DONE.**
 
-No final presentation/PPTX has been created in this effort yet.
-
-That is intentional so far because the baseline/project truth is still being reconciled, but time pressure means the transition from evidence gathering to presentation construction will soon need to be explicit.
+No final PPTX/presentation artifact has been created in this effort yet.
 
 ---
 
 ## 19. Complete implementation/runtime proof package
 
-**Assistant commitment/goal:** map what actually runs and attach presentation claims to evidence.
+**Goal:** establish what actually runs and bind presentation claims to evidence.
 
 **Status: NOT YET DONE.**
 
-This remains one of the most important unfinished tasks before baseline freeze/night-run activation.
+This is a major prerequisite for baseline freeze/night-run activation.
 
 ---
 
@@ -348,14 +277,17 @@ This remains one of the most important unfinished tasks before baseline freeze/n
 
 The GitHub/context architecture and night-run infrastructure are substantially real and inspectable.
 
-The biggest area where assistant wording previously ran ahead of actuality was **completion of the code/runtime reconciliation** and, briefly, the claim that `STATE.md` itself had already been expanded when only its future instructions had been expanded.
+The largest outstanding truth gap is **implementation/runtime reconciliation**, not context documentation.
 
-Those distinctions are now explicit.
+Two assistant overstatements have been explicitly caught/corrected:
 
-The project should continue from the rule:
+1. implying the Frank/Claude archive-to-runtime reconciliation was further complete than it was;
+2. saying `.nightrun/STATE.md` itself had already been expanded when initially only the future-state instructions in `NIGHT_RUN.md` had been expanded.
 
-`assistant statement != completion evidence`
+Standing rule:
 
-Use:
+`assistant statement -> file/commit/runtime check -> status -> correction if needed`
 
-`statement -> GitHub/file/commit/runtime check -> status -> correction if needed`.
+not:
+
+`assistant said it -> therefore it happened`.
