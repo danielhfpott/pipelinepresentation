@@ -320,6 +320,27 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
 .sphone{
   font:700 clamp(34px,7vw,86px)/1 "IBM Plex Sans",sans-serif;color:#34D399;letter-spacing:-.02em
 }
+/* the Corti slide — deliberately sparse. Frank: "skal ikke være overcrowded" */
+.cgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:clamp(24px,4vw,56px);text-align:left;max-width:900px;margin:0 auto
+}
+.clab{
+  font:600 clamp(11px,1.2vw,13px)/1 "IBM Plex Mono",monospace;
+  letter-spacing:.16em;text-transform:uppercase;color:#5E7183;
+  margin:0 0 clamp(12px,1.8vw,20px);padding-bottom:10px;border-bottom:1px solid #22303D
+}
+.citem{
+  font:400 clamp(17px,2.3vw,27px)/1.45 "IBM Plex Sans",sans-serif;
+  color:#EEF3F8;margin:0
+}
+.cnote{font:400 clamp(12px,1.4vw,15px)/1.4 "IBM Plex Mono",monospace;color:#5E7183;margin:6px 0 0}
+.cagents{
+  margin:clamp(28px,4.5vw,52px) auto 0;max-width:860px;
+  font:400 clamp(13px,1.6vw,18px)/1.7 "IBM Plex Sans",sans-serif;color:#9BAEC0
+}
+.cagents .keep{font-weight:700}
+
 .snav{
   position:fixed;left:0;right:0;bottom:clamp(14px,2.4vw,26px);
   display:flex;justify-content:center;gap:9px;align-items:center
@@ -423,8 +444,8 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
     <div class="railcol"><span class="dot"></span></div>
     <div class="when">01 · 112 call<div class="clinical">Caller speaks to an operator who types into a flowchart.</div></div>
     <div class="body"><div class="card">
-      <div class="card-head"><h3>Nothing reaches us here</h3><span class="tier t-external">External</span></div>
-      <p class="none">The ambulance physician never hears the 112 audio. The richest source in the chain is discarded at the first hop.</p>
+      <div class="card-head"><h3>The call is heard once, by one person</h3><span class="tier t-external">External</span></div>
+      <p>The ambulance physician <b>never hears the 112 audio</b>. An operator listens, interprets, and types into a flowchart. Everything the caller conveyed that did not fit the form is gone at the first hop — and it is the richest source in the entire chain.</p>
     </div></div>
   </div>
 
@@ -432,8 +453,8 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
     <div class="railcol"><span class="dot"></span></div>
     <div class="when">02 · Dispatch<div class="clinical">Compressed text on screen — “child unconscious” — which grows.</div></div>
     <div class="body"><div class="card">
-      <div class="card-head"><h3>Text on a screen, re-keyed by hand</h3><span class="tier t-future">Future</span></div>
-      <p>Speech recognition on the 112 call was discussed and is not built. It stays roadmap.</p>
+      <div class="card-head"><h3>Re-keyed by hand — the loss this project is named after</h3><span class="tier t-future">Future</span></div>
+      <p>What the crew receives is what a human retyped. <b>This is the boundary the whole idea is aimed at</b> — but speech recognition on the 112 call is <b>not built</b> in the inspected code, so it stays roadmap and must be spoken in future tense.</p>
     </div></div>
   </div>
 
@@ -687,7 +708,8 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
   <!-- 1 · the break -->
   <section class="sframe on">
     <p class="skicker">Acute care today</p>
-    <h2 class="sbig">Context is rebuilt from scratch at <em>every</em> boundary.</h2>
+    <h2 class="sbig">A person hears the call. A person <em>retypes</em> it.</h2>
+    <p class="ssub">Every boundary after that rebuilds the context again from whatever survived.</p>
     <div class="sfig">
       <svg viewBox="0 0 960 116" role="img" aria-label="Nine stages of prehospital care connected by broken links, showing context lost at every boundary.">
         <g stroke="#3A4956" stroke-width="2.5" stroke-dasharray="7 7">
@@ -770,11 +792,37 @@ footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
     <p class="ssub">A scribe records what you said. This checks it against what you are about to do.</p>
   </section>
 
-  <!-- 5 · the honest close -->
+  <!-- 5 · THE CORTI SLIDE — the one Frank asked for. Do not crowd it. -->
+  <section class="sframe">
+    <p class="skicker">Corti in the pipeline</p>
+    <div class="cgrid">
+      <div class="ccol">
+        <p class="clab">Speech → text</p>
+        <p class="citem">/transcripts</p>
+        <p class="citem">/streams</p>
+        <p class="citem">/transcribe</p>
+      </div>
+      <div class="ccol">
+        <p class="clab">Text → document</p>
+        <p class="citem">Guided Documents</p>
+        <p class="cnote">11-section PPJ template</p>
+      </div>
+      <div class="ccol">
+        <p class="clab">Experts</p>
+        <p class="citem">pubmed</p>
+        <p class="citem">clinical-trials</p>
+        <p class="citem">medical-calculator</p>
+        <p class="citem">memory</p>
+      </div>
+    </div>
+    <p class="cagents"><span class="keep">7 agents</span> · anonymise · guideline router · RAG gate · reflect · section correct · ambient query · ambient safety</p>
+  </section>
+
+  <!-- 6 · the honest close -->
   <section class="sframe">
     <p class="skicker">What runs today</p>
-    <h2 class="sbig">Four of Corti's five product areas. <span class="keep">Seven agents.</span></h2>
-    <p class="ssub">The QR is real. The hospital system on the other side is not ours yet — that is the next boundary, not a claim.</p>
+    <h2 class="sbig">The QR is real. <span class="keep">The information arrives first.</span></h2>
+    <p class="ssub">The hospital system on the other side is not ours yet — that is the next boundary, not a claim.</p>
   </section>
 
   <div class="snav" id="snav"></div>

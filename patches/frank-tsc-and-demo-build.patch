@@ -1,0 +1,60 @@
+diff --git a/package.json b/package.json
+index 1b9c3e8..4732072 100644
+--- a/package.json
++++ b/package.json
+@@ -6,6 +6,7 @@
+   "scripts": {
+     "dev": "vite",
+     "build": "tsc -b && vite build",
++    "build:demo": "tsc -b && vite build --mode demo",
+     "lint": "oxlint",
+     "preview": "vite preview",
+     "test": "vitest run"
+diff --git a/src/lib/akutBarn/labels.ts b/src/lib/akutBarn/labels.ts
+index 7867a29..ec4f202 100644
+--- a/src/lib/akutBarn/labels.ts
++++ b/src/lib/akutBarn/labels.ts
+@@ -20,7 +20,7 @@ const SECTION_LABELS: Record<string, { da: string; en: string }> = {
+   blodprodukter: { da: "Blodprodukter", en: "Blood products" },
+ };
+ 
+-const FIELD_LABELS: Record<string, { da: string; en: string }> = {
++const FIELD_LABELS = {
+   adrenalin: { da: "Adrenalin", en: "Adrenaline" },
+   atropin: { da: "Atropin", en: "Atropine" },
+   amiodaron: { da: "Amiodaron", en: "Amiodarone" },
+@@ -56,7 +56,7 @@ const FIELD_LABELS: Record<string, { da: string; en: string }> = {
+   plasma: { da: "Plasma", en: "Plasma" },
+   trombocytter: { da: "Trombocytter", en: "Platelets" },
+   blodvolumen: { da: "blodvolumen", en: "blood volume" },
+-};
++} satisfies Record<string, { da: string; en: string }>;
+ 
+ /** The only Danish word that appears inside a value rather than a label. */
+ function translateValue(value: string, lang: Lang): string {
+diff --git a/src/lib/backend/serialQueue.test.ts b/src/lib/backend/serialQueue.test.ts
+index a85e3aa..2497c1f 100644
+--- a/src/lib/backend/serialQueue.test.ts
++++ b/src/lib/backend/serialQueue.test.ts
+@@ -16,7 +16,6 @@ describe("createSerialQueue", () => {
+     const runSerially = createSerialQueue();
+     const order: number[] = [];
+     const a = deferred<void>();
+-    const b = deferred<void>();
+ 
+     const p1 = runSerially(async () => {
+       order.push(1);
+diff --git a/vite.config.ts b/vite.config.ts
+index 49f4f66..40d3cd8 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -11,4 +11,9 @@ export default defineConfig(({ mode }) => ({
+   plugins: [react()],
+   base: mode === "demo" ? (process.env.VITE_DEMO_BASE ?? "/") : "/",
+   build: mode === "demo" ? { outDir: "dist-demo", emptyOutDir: true } : {},
++  // `--mode demo` MUST imply the demo-only flag. Left to a gitignored
++  // .env.demo, a missing file silently yields a full-pipeline bundle in
++  // dist-demo/ that reaches the real Supabase from a public page. Forcing it
++  // here means the demo build cannot be accidentally un-demoed.
++  define: mode === "demo" ? { "import.meta.env.VITE_DEMO_ONLY": '"1"' } : {},
+ }));
