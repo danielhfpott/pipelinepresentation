@@ -30,6 +30,7 @@ Read these in order before making large conclusions:
 1. `context/00_READ_ME_FIRST.md`
 2. `context/05_SOURCE_OF_TRUTH_PROTOCOL.md`
 3. **`context/19_CANONICAL_CONSOLIDATED_CURRENT_STATE.md`**
+3b. **`context/20_WAKE_UP_DELTA.md`** — doc 19 predates `presentation/` and `doctrine/`; this is the delta and the morning order
 4. `context/14_FRANK_BUILD_RUNTIME_VERIFICATION.md`
 5. `context/16_DEMO_SURFACE_RECONCILIATION.md`
 6. `context/17_RED_TEAM.md`
@@ -48,6 +49,12 @@ Read these in order before making large conclusions:
 19. `context/06_CLAUDE_BUILD_MATERIAL_RECONCILIATION.md`
 20. `context/13_CLAUDE_WEB_CHAT_PROVENANCE_AND_RESEARCH_RECONCILIATION.md`
 21. `.nightrun/STATE.md` when night-run/presentation optimization state matters.
+
+Then, when the task touches the presentation itself:
+
+- `presentation/continuum.html` — the presentation surface: **Map** (team), **Run sheet** (presenter, with a rehearsal timer), **Stage** (the room, near-wordless). `presentation/README.md` explains the modes and keys.
+- `doctrine/` — truth doctrine (tier table now filled from verified evidence), demo script, presentation build, run log, preflight.
+  **`doctrine/CLAUDE_PROPOSED_WEBCLAUDE.md` is a proposed replacement for the root `CLAUDE.md` and has deliberately NOT been merged over it.** Two governance models are open; that is Daniel's decision, not an agent's.
 
 Then inspect the exact code/runtime/source evidence needed for the task.
 
