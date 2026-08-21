@@ -1,0 +1,1054 @@
+<title>Acute Care Continuum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital@1&display=swap">
+
+<style>
+:root{
+  --ground:#F2F4F7; --surface:#FFFFFF; --surface-2:#E8ECF1;
+  --ink:#111820; --ink-2:#3D4B59; --muted:#5F6E7E; --line:#D2D9E1;
+  --verified:#0F766E; --verified-bg:#DDF3F0;
+  --built:#1D4ED8;    --built-bg:#DEE8FD;
+  --partial:#8A6D1F;  --partial-bg:#F7EED4;
+  --external:#6D5A8C; --external-bg:#EBE4F4;
+  --future:#6B7885;
+  --critical:#B3261E; --critical-bg:#FBE3E0;
+  --phone:#0F766E;    --phone-bg:#DDF3F0;
+  --shadow:0 1px 2px rgba(17,24,32,.06),0 8px 24px rgba(17,24,32,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B0F14; --surface:#141A21; --surface-2:#1C242D;
+    --ink:#E6EBF0; --ink-2:#BAC6D2; --muted:#8896A4; --line:#28323D;
+    --verified:#34D399; --verified-bg:#0E2B26;
+    --built:#7DA9F5;    --built-bg:#12203A;
+    --partial:#D4B33F;  --partial-bg:#2A2413;
+    --external:#B7A0D9; --external-bg:#221B31;
+    --future:#8896A4;
+    --critical:#FF7A6B; --critical-bg:#2E1512;
+    --phone:#34D399;    --phone-bg:#0E2B26;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B0F14; --surface:#141A21; --surface-2:#1C242D;
+  --ink:#E6EBF0; --ink-2:#BAC6D2; --muted:#8896A4; --line:#28323D;
+  --verified:#34D399; --verified-bg:#0E2B26;
+  --built:#7DA9F5;    --built-bg:#12203A;
+  --partial:#D4B33F;  --partial-bg:#2A2413;
+  --external:#B7A0D9; --external-bg:#221B31;
+  --future:#8896A4;
+  --critical:#FF7A6B; --critical-bg:#2E1512;
+  --phone:#34D399;    --phone-bg:#0E2B26;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:40px 24px 80px}
+h1,h2,h3{text-wrap:balance;margin:0}
+:focus-visible{outline:2px solid var(--built);outline-offset:2px;border-radius:4px}
+
+/* ---- mode bar ---- */
+.bar{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)
+}
+.seg{display:flex;background:var(--surface-2);border-radius:7px;padding:3px;gap:2px}
+.seg button{
+  font:600 12px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;
+  text-transform:uppercase;padding:8px 14px;border:0;border-radius:5px;
+  background:transparent;color:var(--muted);cursor:pointer
+}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.barnote{font:400 12px/1.5 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
+kbd{
+  font:600 11px/1 "IBM Plex Mono",monospace;background:var(--surface-2);
+  border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:3px 5px;color:var(--ink-2)
+}
+.clock{
+  margin-left:auto;font:600 12px/1 "IBM Plex Mono",monospace;color:var(--ink-2);
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px
+}
+body:not(.run) .clock{display:none}
+
+/* ---- rehearsal transport ---- */
+.transport{
+  display:none;position:sticky;top:0;z-index:20;margin:0 0 18px;
+  padding:12px 16px;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);box-shadow:var(--shadow);
+  align-items:center;gap:8px 16px;flex-wrap:wrap
+}
+body.run .transport{display:flex}
+.tbtn{
+  font:600 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.07em;text-transform:uppercase;
+  padding:9px 14px;border:1px solid var(--line);border-radius:6px;
+  background:var(--surface-2);color:var(--ink);cursor:pointer
+}
+.tbtn.primary{background:var(--built);border-color:var(--built);color:#fff}
+:root[data-theme="dark"] .tbtn.primary,
+:root:not([data-theme="light"]) .tbtn.primary{color:#0B0F14}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .tbtn.primary{color:#fff}}
+.tbig{
+  font:700 26px/1 "IBM Plex Mono",monospace;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;color:var(--ink);min-width:86px
+}
+.tseg{display:flex;flex-direction:column;gap:3px;min-width:190px}
+.tseg .lab{font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted)}
+.tseg .val{font:600 14px/1.2 "IBM Plex Sans",sans-serif;color:var(--ink)}
+.tdelta{font:600 12px/1 "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  padding:5px 9px;border-radius:5px;background:var(--surface-2);color:var(--muted)}
+.tdelta.over{background:var(--critical-bg);color:var(--critical)}
+.tdelta.under{background:var(--verified-bg);color:var(--verified)}
+.tbar{flex-basis:100%;height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.tbar i{display:block;height:100%;background:var(--built);width:0}
+.tbar i.over{background:var(--critical)}
+
+/* current segment highlight */
+body.run .stage.cur .card{outline:2px solid var(--built);outline-offset:3px}
+body.run .stage.cur .cue{background:var(--built-bg)}
+body.run .stage.done .card{opacity:.45}
+body.run .stage.cut .card{opacity:.3}
+body.run .stage.cut .cue .t{text-decoration:line-through}
+.cutbadge{display:none;margin-left:auto;font:600 10.5px/1 "IBM Plex Mono",monospace;
+  letter-spacing:.07em;color:var(--muted)}
+body.run .stage.cut .cutbadge{display:inline}
+
+/* ---- report ---- */
+.report{display:none;margin:22px 0 0;padding:18px;background:var(--surface);
+  border:1.5px solid var(--built);border-radius:10px;box-shadow:var(--shadow)}
+.report.show{display:block}
+.report h3{font:600 15px/1.3 "IBM Plex Sans",sans-serif;margin-bottom:4px}
+.report .sub{font-size:13px;color:var(--ink-2);margin:0 0 14px}
+.report table{width:100%;border-collapse:collapse;font-size:13px}
+.report th{text-align:left;font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);padding:0 10px 8px 0;border-bottom:1px solid var(--line)}
+.report td{padding:7px 10px 7px 0;border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.report td.nm{color:var(--ink)}
+.report td.o{color:var(--critical);font-weight:600}
+.report td.u{color:var(--verified);font-weight:600}
+.report tr.tot td{border-bottom:0;font-weight:700;color:var(--ink);padding-top:11px}
+
+/* ---- drills ---- */
+.drills{display:none;margin:18px 0 0;padding:18px;background:var(--surface);
+  border:1.5px dashed var(--critical);border-radius:10px}
+.drills.show{display:block}
+.drills h3{font:600 15px/1.3 "IBM Plex Sans",sans-serif;margin-bottom:12px;color:var(--critical)}
+.drills dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 18px;font-size:13.5px}
+.drills dt{font:600 12px/1.5 "IBM Plex Mono",monospace;color:var(--ink)}
+.drills dd{margin:0;color:var(--ink-2)}
+
+/* ---- header ---- */
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 14px
+}
+h1{font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.022em;line-height:1.08}
+.thesis{margin-top:18px;max-width:62ch;font-size:clamp(16.5px,1.9vw,19px);color:var(--ink-2);line-height:1.5}
+.thesis strong{color:var(--ink);font-weight:600}
+.meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 20px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--muted)}
+.rule{height:1px;background:var(--line);margin:36px 0}
+
+/* ---- legend ---- */
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0;padding:0;list-style:none}
+.legend li{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2)}
+.swatch{width:11px;height:11px;border-radius:2.5px;flex:none}
+.legend .dash{background:transparent;border:1.5px dashed var(--future)}
+.legend-note{font-size:12.5px;color:var(--muted);margin:12px 0 0;max-width:66ch}
+body.run .legend,body.run .legend-note,body.run .thesis,body.run .meta{display:none}
+
+/* ---- tier badge ---- */
+.tier{
+  display:inline-flex;align-items:center;gap:6px;flex:none;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  padding:3px 8px;border-radius:4px;white-space:nowrap
+}
+.t-verified{color:var(--verified);background:var(--verified-bg)}
+.t-built{color:var(--built);background:var(--built-bg)}
+.t-external{color:var(--external);background:var(--external-bg)}
+.t-future{color:var(--future);border:1px dashed var(--future)}
+
+/* ---- continuum ---- */
+.stage{display:grid;grid-template-columns:150px 1fr;gap:0 28px;position:relative}
+.railcol{position:relative;padding:22px 0 26px}
+.railcol::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--line)}
+.stage:first-of-type .railcol::before{top:26px}
+.dot{position:absolute;left:4px;top:22px;width:16px;height:16px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--line);z-index:1}
+.stage.demo .dot{border-color:var(--built);background:var(--built)}
+.stage.beat .dot{border-color:var(--critical);background:var(--critical);box-shadow:0 0 0 4px var(--critical-bg)}
+.when{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:24px 0 0 34px}
+.clinical{margin-top:5px;font-size:13.5px;color:var(--ink-2);line-height:1.4;
+  font-family:"IBM Plex Sans",sans-serif;letter-spacing:0;text-transform:none}
+.body{padding:22px 0 26px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  padding:16px 18px;box-shadow:var(--shadow)}
+.stage.beat .card{border-color:var(--critical);border-width:1.5px}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.card h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+.card p{margin:9px 0 0;font-size:14.5px;color:var(--ink-2);max-width:62ch}
+.none{color:var(--muted);font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  padding:3px 8px;border-radius:4px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.chip.api{color:var(--built)}
+
+/* ---- run-sheet cues ---- */
+.cue{
+  display:none;align-items:center;gap:10px;flex-wrap:wrap;
+  margin:0 0 10px;padding:8px 12px;border-radius:7px;
+  background:var(--surface-2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;color:var(--ink-2)
+}
+body.run .cue{display:flex}
+.cue .t{font-weight:600;color:var(--ink)}
+.cue .who{color:var(--muted)}
+.cue .live{
+  margin-left:auto;color:var(--phone);background:var(--phone-bg);
+  padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:.06em
+}
+body:not(.run) .stage:not(.demo):not(.beat){opacity:1}
+body.run .stage:not(.demo):not(.beat) .card{opacity:.5}
+body.run .stage:not(.demo):not(.beat) .chips{display:none}
+
+/* ---- crossover bands ---- */
+.cross{
+  display:none;margin:6px 0 6px 178px;padding:11px 16px;border-radius:8px;
+  border:1.5px dashed var(--phone);background:var(--phone-bg);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--phone);font-weight:600;letter-spacing:.05em
+}
+.cross span{font-weight:400;color:var(--ink-2);letter-spacing:0;display:block;margin-top:4px;
+  font-family:"IBM Plex Sans",sans-serif;font-size:13px}
+body.run .cross{display:block}
+
+/* ---- stage topology ---- */
+.topo{display:none;margin:8px 0 14px 178px;padding:16px 18px;
+  background:var(--surface);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}
+body.run .topo{display:block}
+.topo-h{margin:0 0 12px;font:600 11px/1 "IBM Plex Mono",ui-monospace,monospace;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.topo svg{min-width:520px}
+.topo-n{margin:12px 0 0;font-size:13px;color:var(--ink-2);max-width:70ch}
+
+/* ---- internal beat list (the load-bearing beat only) ---- */
+.beatlist{margin:14px 0 0;padding:0 0 0 20px;display:none;flex-direction:column;gap:7px}
+body.run .beatlist{display:flex}
+.beatlist li{font-size:13.5px;color:var(--ink-2);line-height:1.45;padding-left:2px}
+.beatlist b{color:var(--ink)}
+.measure{
+  display:inline-block;margin-left:6px;padding:2px 7px;border-radius:4px;
+  border:1px dashed var(--partial);color:var(--partial);
+  font:600 10px/1.5 "IBM Plex Mono",monospace;letter-spacing:.07em
+}
+
+/* ---- x-ray ---- */
+.xray-toggle{
+  display:none;width:100%;margin-top:12px;padding:11px 14px;cursor:pointer;
+  border:1.5px dashed var(--critical);border-radius:8px;background:transparent;
+  color:var(--critical);font:600 12px/1 "IBM Plex Mono",monospace;
+  letter-spacing:.07em;text-transform:uppercase;text-align:left
+}
+body.run .xray-toggle{display:block}
+body.run .xray[hidden]{display:none}
+figure{margin:22px 0 0;padding:22px 18px 18px;background:var(--surface);
+  border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}
+body.run figure{border-color:var(--critical)}
+.figscroll{overflow-x:auto}
+svg{display:block;max-width:100%;height:auto;min-width:560px;margin:0 auto}
+/* var() does not resolve in SVG presentation attributes — drive these from CSS */
+.cf{fill:var(--critical)} .cs{stroke:var(--critical)} .cbg{fill:var(--critical-bg)}
+figcaption{margin-top:16px;font-size:13.5px;color:var(--ink-2);max-width:70ch}
+figcaption b{color:var(--ink)}
+blockquote{margin:22px 0 0;padding:0 0 0 18px;border-left:2px solid var(--line);
+  font-family:"IBM Plex Serif",Georgia,serif;font-style:italic;font-size:15px;
+  color:var(--ink-2);max-width:64ch;line-height:1.5}
+blockquote cite{display:block;margin-top:9px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-style:normal;font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+/* ---- coverage ---- */
+h2{font-size:13px;font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:18px}
+.cov{display:grid;grid-template-columns:repeat(auto-fit,minmax(184px,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.cov li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 15px}
+.cov li.absent{border-style:dashed;background:transparent}
+.cov .n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.cov .t{display:block;font-weight:600;font-size:14.5px;margin:3px 0 8px}
+.cov li.absent .t{color:var(--muted)}
+.note{margin-top:14px;font-size:13.5px;color:var(--ink-2);max-width:74ch;
+  padding-left:14px;border-left:2px solid var(--line)}
+.note code{font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+footer{margin-top:52px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+
+/* ---- STAGE: the projector surface. Almost no words by design. ---- */
+.stagev{
+  position:fixed;inset:0;z-index:100;display:none;
+  background:#080C11;color:#EEF3F8;
+  padding:clamp(28px,5vw,64px);
+  flex-direction:column;justify-content:center;align-items:center;text-align:center
+}
+.stagev.show{display:flex}
+.sframe{display:none;max-width:1100px;width:100%}
+.sframe.on{display:block}
+.skicker{
+  font:600 clamp(11px,1.3vw,14px)/1 "IBM Plex Mono",monospace;
+  letter-spacing:.2em;text-transform:uppercase;color:#5E7183;margin-bottom:clamp(18px,3vw,34px)
+}
+.sbig{
+  font:700 clamp(30px,6.2vw,74px)/1.04 "IBM Plex Sans",sans-serif;
+  letter-spacing:-.03em;text-wrap:balance;margin:0
+}
+.sbig em{font-style:normal;color:#FF7A6B}
+.sbig .keep{color:#34D399}
+.ssub{
+  margin:clamp(18px,2.6vw,30px) auto 0;max-width:26ch;
+  font:400 clamp(15px,1.9vw,23px)/1.4 "IBM Plex Sans",sans-serif;color:#9BAEC0
+}
+.sfig{margin:clamp(20px,3.4vw,42px) auto 0;max-width:960px}
+.sfig svg{min-width:0;width:100%}
+.sphone{
+  font:700 clamp(34px,7vw,86px)/1 "IBM Plex Sans",sans-serif;color:#34D399;letter-spacing:-.02em
+}
+/* the Corti slide — deliberately sparse. Frank: "skal ikke være overcrowded" */
+.cgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:clamp(24px,4vw,56px);text-align:left;max-width:900px;margin:0 auto
+}
+.clab{
+  font:600 clamp(11px,1.2vw,13px)/1 "IBM Plex Mono",monospace;
+  letter-spacing:.16em;text-transform:uppercase;color:#5E7183;
+  margin:0 0 clamp(12px,1.8vw,20px);padding-bottom:10px;border-bottom:1px solid #22303D
+}
+.citem{
+  font:400 clamp(17px,2.3vw,27px)/1.45 "IBM Plex Sans",sans-serif;
+  color:#EEF3F8;margin:0
+}
+.cnote{font:400 clamp(12px,1.4vw,15px)/1.4 "IBM Plex Mono",monospace;color:#5E7183;margin:6px 0 0}
+.cagents{
+  margin:clamp(28px,4.5vw,52px) auto 0;max-width:860px;
+  font:400 clamp(13px,1.6vw,18px)/1.7 "IBM Plex Sans",sans-serif;color:#9BAEC0
+}
+.cagents .keep{font-weight:700}
+
+.snav{
+  position:fixed;left:0;right:0;bottom:clamp(14px,2.4vw,26px);
+  display:flex;justify-content:center;gap:9px;align-items:center
+}
+.sdot{width:9px;height:9px;border-radius:50%;background:#22303D;border:0;padding:0;cursor:pointer}
+.sdot[aria-current="true"]{background:#EEF3F8;width:26px;border-radius:5px}
+.shint{
+  position:fixed;top:clamp(14px,2.4vw,24px);right:clamp(14px,2.4vw,24px);
+  font:400 11.5px/1 "IBM Plex Mono",monospace;color:#42535F;letter-spacing:.08em
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:720px){
+  .wrap{padding:28px 16px 60px}
+  .stage{grid-template-columns:1fr}
+  .railcol{display:none}
+  .when{padding:0 0 8px}
+  .body{padding:0 0 18px}
+  .cross,.topo{margin-left:0}
+  .card{border-left-width:3px}
+  .stage.demo .card{border-left-color:var(--built)}
+  .stage.beat .card{border-left-color:var(--critical)}
+}
+</style>
+
+<div class="wrap">
+
+  <div class="bar">
+    <div class="seg" role="group" aria-label="View mode">
+      <button id="bMap" aria-pressed="true">Map</button>
+      <button id="bRun" aria-pressed="false">Run sheet</button>
+      <button id="bStage" aria-pressed="false">Stage</button>
+    </div>
+    <p class="barnote"><kbd>M</kbd> view · <kbd>S</kbd> stage · <kbd>X</kbd> mechanism · <kbd>D</kbd> drills</p>
+    <p class="clock" id="clock">demo 3:00 · total 5:00</p>
+  </div>
+
+  <div class="transport" id="transport">
+    <button class="tbtn primary" id="tStart">Start</button>
+    <button class="tbtn" id="tNext">Next beat →</button>
+    <button class="tbtn" id="tReset">Reset</button>
+    <span class="tbig" id="tTotal">0:00</span>
+    <span class="tseg">
+      <span class="lab">Current beat</span>
+      <span class="val" id="tName">Introductions — all four</span>
+    </span>
+    <span class="tdelta" id="tDelta">0:00 / 0:25</span>
+    <button class="tbtn" id="tCut">Cut: full 180s</button>
+    <span class="tbar"><i id="tFill"></i></span>
+  </div>
+
+  <div class="report" id="report">
+    <h3>Measured run</h3>
+    <p class="sub">Target versus actual. This is the number nobody had — every duration in the docs was an estimate until this ran.</p>
+    <table>
+      <thead><tr><th>Beat</th><th>Target</th><th>Actual</th><th>Δ</th></tr></thead>
+      <tbody id="reportBody"></tbody>
+    </table>
+  </div>
+
+  <div class="drills" id="drills">
+    <h3>If it breaks — no recovery time exists</h3>
+    <dl>
+      <dt>Wifi / Corti down</dt><dd>Demo-only build. Fully interactive, zero backend, QR still genuinely encodes. <b>Rehearse this switch once.</b></dd>
+      <dt>Microphone refuses</dt><dd>Preloaded audio — and it should already be the default, not the fallback. Explicitly permitted.</dd>
+      <dt>Wrong sample rate</dt><dd>App throws in Danish. No mid-demo recovery. Go straight to preloaded.</dd>
+      <dt>Ambient socket drops</dt><dd>The app surfaces it rather than ticking dead. Say so out loud — it is a feature.</dd>
+      <dt>Display fails</dt><dd>Screen recording of the verified path. <b>Does not exist yet.</b></dd>
+    </dl>
+  </div>
+
+  <p class="eyebrow">Corti Hack for Health · prehospital · verified 2026-08-21</p>
+  <h1>Where the context breaks, and where we keep it</h1>
+  <p class="thesis">
+    Acute care rebuilds its context from scratch at every boundary — dispatch to ambulance,
+    ambulance to hospital. This is the whole continuum, with each hop marked by
+    <strong>what actually exists</strong> rather than what the deck would like to claim.
+  </p>
+  <div class="meta">
+    <span>Clinlog/hackathon-ppj @ b1f816b</span><span>159/159 tests</span>
+    <span>13 edge functions</span><span>7 Corti agents</span>
+  </div>
+
+  <div class="rule"></div>
+
+  <ul class="legend">
+    <li><span class="swatch" style="background:var(--verified)"></span>Verified by execution</li>
+    <li><span class="swatch" style="background:var(--built)"></span>Built — code-evidenced</li>
+    <li><span class="swatch" style="background:var(--external)"></span>External assumption</li>
+    <li><span class="swatch dash"></span>Future — not built</li>
+  </ul>
+  <p class="legend-note">
+    “Verified” means it was run: tests, typecheck, or bundle. “Built” means the code path exists and
+    was read, but no live Corti call was observed — the verification environment had no credentials.
+    That line is deliberate and should not be blurred on stage.
+  </p>
+
+  <div class="rule"></div>
+
+  <div class="stage">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">01 · 112 call<div class="clinical">Caller speaks to an operator who types into a flowchart.</div></div>
+    <div class="body"><div class="card">
+      <div class="card-head"><h3>The call is heard once, by one person</h3><span class="tier t-external">External</span></div>
+      <p>The ambulance physician <b>never hears the 112 audio</b>. An operator listens, interprets, and types into a flowchart. Everything the caller conveyed that did not fit the form is gone at the first hop — and it is the richest source in the entire chain.</p>
+    </div></div>
+  </div>
+
+  <div class="stage">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">02 · Dispatch<div class="clinical">Compressed text on screen — “child unconscious” — which grows.</div></div>
+    <div class="body"><div class="card">
+      <div class="card-head"><h3>Re-keyed by hand — the loss this project is named after</h3><span class="tier t-future">Future</span></div>
+      <p>What the crew receives is what a human retyped. <b>This is the boundary the whole idea is aimed at</b> — but speech recognition on the 112 call is <b>not built</b> in the inspected code, so it stays roadmap and must be spoken in future tense.</p>
+    </div></div>
+  </div>
+
+  <div class="stage">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">03 · Pre-arrival<div class="clinical">The physician prepares: likely problems, drugs, equipment.</div></div>
+    <div class="body"><div class="card">
+      <div class="card-head"><h3>Clinical cognition, unassisted</h3><span class="tier t-external">External</span></div>
+      <p>Information arriving before contact already changes preparedness — the argument for everything downstream.</p>
+    </div></div>
+  </div>
+
+  <div class="topo" id="topo">
+    <p class="topo-h">Stage topology — what is plugged into what</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 720 132" role="img" aria-label="The real phone connects by USB to the presentation laptop running scrcpy, which mirrors the screen and forwards mouse and keyboard control back to the phone. The laptop drives the venue display over HDMI, and also hosts this page as a second surface.">
+      <defs>
+        <marker id="ta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+
+      <rect x="8" y="28" width="150" height="52" rx="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+      <text x="83" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600" fill="currentColor">Real phone</text>
+      <text x="83" y="67" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">app + microphone</text>
+
+      <line x1="162" y1="42" x2="248" y2="42" stroke="currentColor" stroke-width="1.5" opacity=".55" marker-end="url(#ta)"/>
+      <text x="205" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="currentColor" opacity=".65">screen</text>
+      <line x1="248" y1="66" x2="162" y2="66" stroke="currentColor" stroke-width="1.5" opacity=".55" marker-end="url(#ta)"/>
+      <text x="205" y="80" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="currentColor" opacity=".65">control</text>
+      <text x="205" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600" fill="currentColor" opacity=".8">USB · scrcpy</text>
+
+      <rect x="252" y="20" width="176" height="68" rx="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+      <text x="340" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600" fill="currentColor">Laptop</text>
+      <text x="340" y="59" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">mirror + this page</text>
+      <text x="340" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">two windows, one screen</text>
+
+      <line x1="432" y1="54" x2="518" y2="54" stroke="currentColor" stroke-width="1.5" opacity=".55" marker-end="url(#ta)"/>
+      <text x="475" y="45" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600" fill="currentColor" opacity=".8">HDMI</text>
+
+      <rect x="522" y="28" width="190" height="52" rx="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+      <text x="617" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600" fill="currentColor">Venue display</text>
+      <text x="617" y="67" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">judges see this</text>
+
+      <text x="8" y="120" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".55">USB, not venue wifi — the mirror never depends on the hall network.</text>
+    </svg>
+    </div>
+    <p class="topo-n">
+      Switching the projector between the phone and this page is a window switch, not a state change —
+      the phone session keeps running underneath. Wireless casting straight to the TV stays a backup,
+      and only after the exact venue hardware has been tested.
+    </p>
+  </div>
+
+  <div class="cross">→ HAND TO PHONE · Frank
+    <span>Everything below happens on the real device. The map stays up behind it; the encounter runs once, unbroken.</span>
+  </div>
+
+  <div class="stage demo" id="s04">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">04 · Encounter<div class="clinical">Assess, monitor, measure, treat. Hands full.</div></div>
+    <div class="body">
+      <p class="cue"><span class="t">0:55 → 1:25</span><span class="who">one voice · Mihai drives the machine</span><span class="live">PHONE LIVE</span></p>
+      <div class="card">
+      <div class="card-head"><h3>Ambient capture into a timestamped event log</h3><span class="tier t-built">Built</span></div>
+      <p>Continuous capture, structured as clinical events rather than a wall of transcript. Facts carry the time they were <em>spoken</em>, not the time they were processed.</p>
+      <div class="chips">
+        <span class="chip api">/v2/interactions/{id}/streams</span>
+        <span class="chip">ambient speech-to-text</span>
+        <span class="chip">anonymised before Corti — fail-closed</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="stage demo" id="s05">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">05 · Question<div class="clinical">A treatment question, asked aloud, mid-encounter.</div></div>
+    <div class="body">
+      <p class="cue"><span class="t">1:25 → 2:05</span><span class="who">feature beat — first to go</span><span class="live">PHONE LIVE</span></p>
+      <div class="card">
+      <div class="card-head"><h3>Answered from <em>this</em> encounter</h3><span class="tier t-built">Built</span></div>
+      <p>Wake word <b>“Forklar” / “Explain”</b>. The answer draws on the encounter so far plus the guideline corpus, and replies in the language the question was asked in.</p>
+      <div class="chips">
+        <span class="chip api">/v1/contexts · /v1/message</span>
+        <span class="chip">agent router · 31 Danish VIP instructions</span>
+        <span class="chip">paediatric weight-based dosing</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="stage beat" id="s06">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">06 · Safety<div class="clinical">Minutes have passed. Working memory holds six other things.</div></div>
+    <div class="body">
+      <p class="cue"><span class="t">2:05 → 2:50</span><span class="who">never cut · everything else is setup for this</span><span class="live">PHONE LIVE</span></p>
+      <div class="card">
+      <div class="card-head"><h3>A fact from minute 2, checked against an action at minute 25</h3><span class="tier t-verified">Verified</span></div>
+      <p>Two tiers: a deterministic rule engine running locally on every update with no model call, plus a two-agent Corti pass. Rules compare <em>facts against facts</em> — so phrasing and distance in time stop mattering.</p>
+      <div class="chips">
+        <span class="chip">allergy conflict</span><span class="chip">drug interaction</span>
+        <span class="chip">contraindication vs live vitals</span><span class="chip">weight-adjusted dose ceiling</span>
+        <span class="chip">AVPU ↔ GCS mismatch</span><span class="chip">laterality drift</span>
+      </div>
+
+      <ol class="beatlist">
+        <li><b>Ambient running</b>, timestamp visible.</li>
+        <li><b>The early fact is stated.</b> Let it pass without comment — remarking on it gives away the ending.</li>
+        <li><b>Skip forward visibly.</b> Say it: <i>“we're jumping ahead six minutes.”</i> Hiding the cut would be the exact silent loss this project exists to criticise — and twenty seconds apart is not impressive.</li>
+        <li><b>The drug is named as planned</b>, not yet given.</li>
+        <li><b>The monitor fires.</b> The warning precedes administration.</li>
+        <li><b>Show the quote it fired on</b>, timestamped from minutes earlier. Turns “it caught something” into “here is where it got that — go check me.” <span class="measure">MEASURE — cut entirely if the quote does not render</span></li>
+        <li><b>Stop talking.</b> Two seconds of silence before the close.</li>
+      </ol>
+
+      <button class="xray-toggle" id="xt" aria-expanded="false" aria-controls="xr">
+        ✛ Reveal the mechanism — 20s cap, the only x-ray in the run
+      </button>
+      </div>
+
+      <figure class="xray" id="xr">
+        <div class="figscroll">
+        <svg viewBox="0 0 720 250" role="img" aria-label="A timeline of one encounter. An allergy stated at minute 2 is held while other facts accumulate, then compared against a drug planned at minute 25, firing an alert before the drug is given.">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+            </marker>
+            <marker id="arC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="cf" d="M0,0 L10,5 L0,10 z"/>
+            </marker>
+          </defs>
+
+          <path d="M96,150 C 200,52 500,52 604,150" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-dasharray="5 4" opacity=".62" marker-end="url(#ar)"/>
+          <text x="350" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif"
+                font-size="12.5" fill="currentColor" opacity=".85">held, then compared — fact against fact</text>
+          <text x="350" y="90" text-anchor="middle" font-family="IBM Plex Mono,monospace"
+                font-size="10.5" fill="currentColor" opacity=".55">no keyword match · no model call · runs on every update</text>
+
+          <line x1="40" y1="150" x2="680" y2="150" stroke="currentColor" stroke-width="1.5" opacity=".3"/>
+
+          <circle cx="96" cy="150" r="5.5" fill="currentColor"/>
+          <text x="96" y="132" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600" fill="currentColor">“allergic to penicillin”</text>
+          <text x="96" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">T+2 min</text>
+
+          <circle cx="266" cy="150" r="3.5" fill="currentColor" opacity=".45"/>
+          <text x="266" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".45">GCS 14</text>
+          <circle cx="400" cy="150" r="3.5" fill="currentColor" opacity=".45"/>
+          <text x="400" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".45">BP 95/60</text>
+          <circle cx="500" cy="150" r="3.5" fill="currentColor" opacity=".45"/>
+          <text x="500" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".45">morphine 5 mg</text>
+
+          <circle class="cf" cx="604" cy="150" r="5.5"/>
+          <text class="cf" x="604" y="132" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600">ampicillin — planned</text>
+          <text x="604" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="currentColor" opacity=".6">T+25 min</text>
+
+          <line class="cs" x1="604" y1="186" x2="604" y2="204" stroke-width="1.5" marker-end="url(#arC)"/>
+          <rect class="cbg cs" x="470" y="208" width="268" height="30" rx="5" stroke-width="1.2"/>
+          <text class="cf" x="604" y="228" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12.5" font-weight="600">STOP — known penicillin allergy</text>
+
+          <text x="40" y="228" font-family="IBM Plex Sans,sans-serif" font-size="12" fill="currentColor" opacity=".7">fires on a</text>
+          <text x="40" y="243" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="currentColor">planned</text>
+          <text x="93" y="243" font-family="IBM Plex Sans,sans-serif" font-size="12" fill="currentColor" opacity=".7">drug — before it is given</text>
+        </svg>
+        </div>
+        <figcaption>
+          <b>Why this is not a scribe.</b> A scribe writes down what you said. This checks what you said
+          against what you are about to do. The allergy was mentioned twenty-three minutes earlier and
+          nobody re-read it — the system never stopped holding it. Because the rule fires on a
+          <b>planned</b> drug rather than an administered one, the warning arrives before the action
+          rather than documenting it afterwards.
+        </figcaption>
+        <blockquote>
+          They compare facts with facts, so they fire regardless of how the clinician phrased things and
+          regardless of how far apart in the encounter the two statements were — no keyword matching,
+          no LLM call, free to run on every update.
+          <cite>src/lib/alarms/rules.ts — the code's own comment</cite>
+        </blockquote>
+      </figure>
+    </div>
+  </div>
+
+  <div class="stage demo" id="s07">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">07 · Documentation<div class="clinical">Dictation in transport — typing in a moving vehicle is impractical.</div></div>
+    <div class="body">
+      <p class="cue"><span class="t">2:50 → 3:20</span><span class="who">same voice · no handover mid-encounter</span><span class="live">PHONE LIVE</span></p>
+      <div class="card">
+      <div class="card-head"><h3>Event log becomes a structured MIST/ABCDE note</h3><span class="tier t-built">Built</span></div>
+      <p>Eleven sections, from a custom Corti Guided Documents template. The clinician types nothing.</p>
+      <div class="chips">
+        <span class="chip api">/v2/documents/</span><span class="chip">text generation</span>
+        <span class="chip">agent-driven section correction</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="stage demo" id="s08">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">08 · Handoff<div class="clinical">This already works today: the receiving team is partly pre-briefed.</div></div>
+    <div class="body">
+      <p class="cue"><span class="t">3:20 → 3:55</span><span class="who">terminal result · then stop talking</span><span class="live">PHONE LIVE</span></p>
+      <div class="card">
+      <div class="card-head"><h3>The information arrives before the patient</h3><span class="tier t-verified">Verified</span></div>
+      <p>CP437 byte-mode QR, generated entirely client-side — so it still works with no network at all. The scanning tablet on the other side is an integration assumption, not something built.</p>
+      <div class="chips"><span class="chip">offline-capable</span><span class="chip">receiving system — external</span></div>
+    </div></div>
+  </div>
+
+  <div class="cross">← BACK TO MAP · Daniel
+    <span>Phone session stays alive underneath. Close on what it means and what it is not: 45s, then 20s.</span>
+  </div>
+
+  <div class="stage">
+    <div class="railcol"><span class="dot"></span></div>
+    <div class="when">09 · Hospital<div class="clinical">Formal handover; the hospital holds the longitudinal record.</div></div>
+    <div class="body"><div class="card">
+      <div class="card-head"><h3>The asymmetry we do not close</h3><span class="tier t-future">Future</span></div>
+      <p>Prehospital has rich live context and little history; the hospital has the history. Earlier access is blocked by data access today, not by architecture.</p>
+    </div></div>
+  </div>
+
+  <div class="rule"></div>
+
+  <h2>Corti product areas exercised</h2>
+  <ul class="cov">
+    <li><span class="n">01</span><span class="t">Dictation</span><span class="tier t-built">Built</span></li>
+    <li><span class="n">02</span><span class="t">Speech-to-text</span><span class="tier t-built">Built</span></li>
+    <li><span class="n">03</span><span class="t">Ambient speech-to-text</span><span class="tier t-built">Built</span></li>
+    <li><span class="n">04</span><span class="t">Text generation</span><span class="tier t-built">Built</span></li>
+    <li class="absent"><span class="n">05</span><span class="t">Medical coding</span><span class="tier t-future">Absent</span></li>
+  </ul>
+  <p class="note">
+    Four of five — the stated minimum, met with no margin. All three transcription surfaces exist
+    separately (<code>/transcripts</code> batch, <code>/streams</code> stateful,
+    <code>/audio-bridge/v2/transcribe</code> stateless), which is stronger than the count suggests.
+    Medical coding is reachable at <code>POST /v2/tools/coding/</code> with the credentials already in
+    <code>.env.corti</code>; whether this tenant is entitled is a test, not an inference.
+  </p>
+
+  <footer>
+    Tiers follow context/11 §1C · runtime evidence context/14 · spine context/15 · red team context/17.<br>
+    No live Corti call was observed in verification — every “Built” above is code-evidenced only.<br>
+    Explanation lives on this surface, never inside the clinician UX.
+  </footer>
+
+</div>
+
+<div class="stagev" id="stagev" role="dialog" aria-modal="true" aria-label="Stage view">
+  <p class="shint">← → step · ESC exit</p>
+
+  <!-- 1 · the break -->
+  <section class="sframe on">
+    <p class="skicker">Acute care today</p>
+    <h2 class="sbig">A person hears the call. A person <em>retypes</em> it.</h2>
+    <p class="ssub">Every boundary after that rebuilds the context again from whatever survived.</p>
+    <div class="sfig">
+      <svg viewBox="0 0 960 116" role="img" aria-label="Nine stages of prehospital care connected by broken links, showing context lost at every boundary.">
+        <g stroke="#3A4956" stroke-width="2.5" stroke-dasharray="7 7">
+          <line x1="50" y1="52" x2="910" y2="52"/>
+        </g>
+        <g fill="#3A4956">
+          <circle cx="50" cy="52" r="8"/><circle cx="157" cy="52" r="8"/><circle cx="265" cy="52" r="8"/>
+          <circle cx="372" cy="52" r="8"/><circle cx="480" cy="52" r="8"/><circle cx="587" cy="52" r="8"/>
+          <circle cx="695" cy="52" r="8"/><circle cx="802" cy="52" r="8"/><circle cx="910" cy="52" r="8"/>
+        </g>
+        <g font-family="IBM Plex Mono,monospace" font-size="13" fill="#5E7183" text-anchor="middle">
+          <text x="50" y="90">112</text><text x="372" y="90">encounter</text>
+          <text x="695" y="90">handoff</text><text x="910" y="90">hospital</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2 · what we keep -->
+  <section class="sframe">
+    <p class="skicker">What we built</p>
+    <h2 class="sbig">From here, <span class="keep">we keep it.</span></h2>
+    <div class="sfig">
+      <svg viewBox="0 0 960 116" role="img" aria-label="The same nine stages. The links between the encounter and the hospital handoff are now solid and continuous, showing context held across the whole encounter.">
+        <line x1="50" y1="52" x2="372" y2="52" stroke="#3A4956" stroke-width="2.5" stroke-dasharray="7 7"/>
+        <line x1="372" y1="52" x2="802" y2="52" stroke="#34D399" stroke-width="5"/>
+        <line x1="802" y1="52" x2="910" y2="52" stroke="#3A4956" stroke-width="2.5" stroke-dasharray="7 7"/>
+        <g fill="#3A4956">
+          <circle cx="50" cy="52" r="8"/><circle cx="157" cy="52" r="8"/><circle cx="265" cy="52" r="8"/>
+          <circle cx="910" cy="52" r="8"/>
+        </g>
+        <g fill="#34D399">
+          <circle cx="372" cy="52" r="11"/><circle cx="480" cy="52" r="11"/><circle cx="587" cy="52" r="11"/>
+          <circle cx="695" cy="52" r="11"/><circle cx="802" cy="52" r="11"/>
+        </g>
+        <g font-family="IBM Plex Mono,monospace" font-size="13" fill="#5E7183" text-anchor="middle">
+          <text x="50" y="90">112</text><text x="910" y="90">hospital</text>
+        </g>
+        <g font-family="IBM Plex Mono,monospace" font-size="13" fill="#34D399" text-anchor="middle">
+          <text x="372" y="94">encounter</text><text x="802" y="94">handoff</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 3 · the phone holds the room -->
+  <section class="sframe">
+    <p class="skicker">Projector switches to the device</p>
+    <p class="sphone">→ PHONE</p>
+    <p class="ssub">If you are reading this, the room is looking at the wrong window.</p>
+  </section>
+
+  <!-- 4 · the mechanism -->
+  <section class="sframe">
+    <p class="skicker">The one thing to understand</p>
+    <h2 class="sbig">Minute 2, checked against minute 25.</h2>
+    <div class="sfig">
+      <svg viewBox="0 0 900 210" role="img" aria-label="An allergy stated at minute two is held across the encounter and compared against a drug planned at minute twenty-five, firing a stop alert before it is given.">
+        <defs>
+          <marker id="sar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#7E93A6"/>
+          </marker>
+        </defs>
+        <path d="M110,118 C 250,26 650,26 790,118" fill="none" stroke="#7E93A6"
+              stroke-width="2" stroke-dasharray="6 5" marker-end="url(#sar)"/>
+        <text x="450" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif"
+              font-size="19" fill="#9BAEC0">held — never re-read, never dropped</text>
+        <line x1="60" y1="118" x2="850" y2="118" stroke="#22303D" stroke-width="2"/>
+        <circle cx="110" cy="118" r="8" fill="#EEF3F8"/>
+        <text x="110" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="19" font-weight="600" fill="#EEF3F8">allergy</text>
+        <text x="110" y="174" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" fill="#5E7183">T+2</text>
+        <circle cx="330" cy="118" r="5" fill="#3A4956"/><circle cx="500" cy="118" r="5" fill="#3A4956"/>
+        <circle cx="650" cy="118" r="5" fill="#3A4956"/>
+        <circle cx="790" cy="118" r="8" fill="#FF7A6B"/>
+        <text x="790" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="19" font-weight="600" fill="#FF7A6B">the drug</text>
+        <text x="790" y="174" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" fill="#5E7183">T+25 · planned</text>
+        <text x="450" y="202" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="20" font-weight="600" fill="#FF7A6B">STOP — before it is given</text>
+      </svg>
+    </div>
+    <p class="ssub">A scribe records what you said. This checks it against what you are about to do.</p>
+  </section>
+
+  <!-- 5 · THE CORTI SLIDE — the one Frank asked for. Do not crowd it. -->
+  <section class="sframe">
+    <p class="skicker">Corti in the pipeline</p>
+    <div class="cgrid">
+      <div class="ccol">
+        <p class="clab">Speech → text</p>
+        <p class="citem">/transcripts</p>
+        <p class="citem">/streams</p>
+        <p class="citem">/transcribe</p>
+      </div>
+      <div class="ccol">
+        <p class="clab">Text → document</p>
+        <p class="citem">Guided Documents</p>
+        <p class="cnote">11-section PPJ template</p>
+      </div>
+      <div class="ccol">
+        <p class="clab">Experts</p>
+        <p class="citem">pubmed</p>
+        <p class="citem">clinical-trials</p>
+        <p class="citem">medical-calculator</p>
+        <p class="citem">memory</p>
+      </div>
+    </div>
+    <p class="cagents"><span class="keep">7 agents</span> · anonymise · guideline router · RAG gate · reflect · section correct · ambient query · ambient safety</p>
+  </section>
+
+  <!-- 6 · the honest close -->
+  <section class="sframe">
+    <p class="skicker">What runs today</p>
+    <h2 class="sbig">The QR is real. <span class="keep">The information arrives first.</span></h2>
+    <p class="ssub">The hospital system on the other side is not ours yet — that is the next boundary, not a claim.</p>
+  </section>
+
+  <div class="snav" id="snav"></div>
+</div>
+
+<script>
+(function(){
+  var b=document.body, $=function(id){return document.getElementById(id);};
+  var map=$('bMap'), run=$('bRun'), stageBtn=$('bStage'), xt=$('xt'), xr=$('xr'),
+      drills=$('drills'), report=$('report'), stagev=$('stagev');
+
+  /* ---------- Two profiles, because the sources disagree and doc 17 §2
+     says rehearse both rather than average them.
+     WIDE  — briefing transcript reading: "five-minute demo, FOLLOWED BY
+             questions", so Q&A sits outside the five.
+     TIGHT — doctrine/DEMO_SCRIPT.md: intros AND three judges' questions
+             sit inside the five, leaving 2:15 for one unbroken encounter.
+             Under TIGHT the wake-word beat is cut: everything that is not
+             setup for the safety moment goes. ---------- */
+  var PROFILES={
+    wide:{ label:'Wide · Q&A outside · demo 3:00', beats:[
+      {n:'Introductions — all four',        t:25,  el:null},
+      {n:'The problem — one voice',         t:30,  el:null},
+      {n:'Encounter opens · ambient',       t:30,  el:'s04'},
+      {n:'Question in context',             t:40,  el:'s05'},
+      {n:'THE BEAT · monitor fires',        t:45,  el:'s06'},
+      {n:'Structured note',                 t:30,  el:'s07'},
+      {n:'Handoff · QR',                    t:35,  el:'s08'},
+      {n:'Beyond a scribe — Daniel',        t:45,  el:null},
+      {n:'Close — one sentence',            t:20,  el:null}
+    ]},
+    tight:{ label:'Tight · Q&A inside · encounter 2:15', beats:[
+      {n:'Introductions — 8s each, verbatim', t:32,  el:null},
+      {n:'The problem — one sentence',        t:15,  el:null},
+      {n:'Encounter opens · early fact',      t:25,  el:'s04'},
+      {n:'THE BEAT · skip, drug, fire, quote',t:60,  el:'s06'},
+      {n:'Structured note',                   t:25,  el:'s07'},
+      {n:'Handoff · QR',                      t:25,  el:'s08'},
+      {n:'Close — one sentence',              t:15,  el:null},
+      {n:'Judge questions ×3',                t:100, el:null}
+    ], cutEl:'s05' }
+  };
+
+  var prof='wide', idx=-1, t0=0, segT0=0, pausedAt=0, ticking=false, actuals=[], raf=null;
+
+  function live(){ return PROFILES[prof].beats; }
+  function cutEl(){ return PROFILES[prof].cutEl||null; }
+  function fmt(s){ s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+  function encounterTotal(){
+    return live().filter(function(x){return x.el;}).reduce(function(a,x){return a+x.t;},0);
+  }
+  function grandTotal(){ return live().reduce(function(a,x){return a+x.t;},0); }
+
+  function paintClock(){
+    $('clock').textContent='encounter '+fmt(encounterTotal())+' · total '+fmt(grandTotal());
+    $('tCut').textContent=PROFILES[prof].label;
+    ['s04','s05','s06','s07','s08'].forEach(function(id){
+      var el=$(id); if(el) el.classList.remove('cut');
+    });
+    var c=cutEl(); if(c&&$(c)) $(c).classList.add('cut');
+    // absolute cue times, recomputed per profile
+    var run=0;
+    live().forEach(function(x){
+      if(x.el&&$(x.el)){
+        var t=$(x.el).querySelector('.cue .t');
+        if(t) t.textContent=fmt(run)+' → '+fmt(run+x.t);
+      }
+      run+=x.t;
+    });
+    if(c&&$(c)){
+      var ct=$(c).querySelector('.cue .t');
+      if(ct) ct.textContent='cut in this profile';
+    }
+  }
+
+  function markStages(){
+    var L=live();
+    ['s04','s05','s06','s07','s08'].forEach(function(id){
+      if($(id)) $(id).classList.remove('cur','done');
+    });
+    L.forEach(function(x,i){
+      if(!x.el||!$(x.el)) return;
+      if(i<idx) $(x.el).classList.add('done');
+      if(i===idx) $(x.el).classList.add('cur');
+    });
+    var cur=L[idx];
+    if(cur&&cur.el&&$(cur.el)){
+      var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      $(cur.el).scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+    }
+  }
+
+  function tick(){
+    if(!ticking) return;
+    var now=performance.now();
+    var L=live(), cur=L[idx];
+    $('tTotal').textContent=fmt((now-t0)/1000);
+    if(cur){
+      var e=(now-segT0)/1000, d=e-cur.t;
+      $('tDelta').textContent=fmt(e)+' / '+fmt(cur.t);
+      $('tDelta').className='tdelta '+(d>0?'over':(cur.t-e>3?'under':''));
+      var pct=Math.min(100,(e/cur.t)*100);
+      $('tFill').style.width=pct+'%';
+      $('tFill').className=d>0?'over':'';
+    }
+    raf=requestAnimationFrame(tick);
+  }
+
+  function startRun(){
+    idx=0; actuals=[]; ticking=true; t0=segT0=performance.now();
+    report.classList.remove('show');
+    $('tStart').textContent='Pause';
+    $('tName').textContent=live()[0].n;
+    markStages(); cancelAnimationFrame(raf); raf=requestAnimationFrame(tick);
+  }
+  function nextBeat(){
+    if(!ticking||idx<0) return;
+    var now=performance.now(), L=live();
+    actuals.push({n:L[idx].n,t:L[idx].t,a:(now-segT0)/1000});
+    idx++;
+    if(idx>=L.length){ finish(); return; }
+    segT0=now; $('tName').textContent=L[idx].n; markStages();
+  }
+  function finish(){
+    ticking=false; cancelAnimationFrame(raf);
+    $('tStart').textContent='Start'; $('tName').textContent='Run complete';
+    var tb=$('reportBody'); tb.innerHTML='';
+    var sumT=0,sumA=0;
+    actuals.forEach(function(r){
+      sumT+=r.t; sumA+=r.a;
+      var d=r.a-r.t, cls=Math.abs(d)<3?'':(d>0?'o':'u');
+      tb.insertAdjacentHTML('beforeend',
+        '<tr><td class="nm">'+r.n+'</td><td>'+fmt(r.t)+'</td><td>'+fmt(r.a)+
+        '</td><td class="'+cls+'">'+(d>0?'+':'−')+fmt(Math.abs(d))+'</td></tr>');
+    });
+    var dt=sumA-sumT, c=Math.abs(dt)<5?'':(dt>0?'o':'u');
+    tb.insertAdjacentHTML('beforeend',
+      '<tr class="tot"><td>Total</td><td>'+fmt(sumT)+'</td><td>'+fmt(sumA)+
+      '</td><td class="'+c+'">'+(dt>0?'+':'−')+fmt(Math.abs(dt))+'</td></tr>');
+    report.classList.add('show');
+    report.scrollIntoView({block:'center'});
+  }
+  function resetRun(){
+    ticking=false; idx=-1; cancelAnimationFrame(raf);
+    $('tStart').textContent='Start'; $('tTotal').textContent='0:00';
+    $('tName').textContent=live()[0].n;
+    $('tDelta').textContent='0:00 / '+fmt(live()[0].t); $('tDelta').className='tdelta';
+    $('tFill').style.width='0'; report.classList.remove('show'); markStages();
+  }
+
+  /* ---------- modes ---------- */
+  function setMode(m){
+    b.classList.toggle('run',m==='run');
+    map.setAttribute('aria-pressed',String(m==='map'));
+    run.setAttribute('aria-pressed',String(m==='run'));
+    stageBtn.setAttribute('aria-pressed',String(m==='stage'));
+    stagev.classList.toggle('show',m==='stage');
+    if(m!=='stage') setXray(m==='map');
+    if(m==='stage') showFrame(sIdx);
+  }
+  function setXray(open){
+    xr.hidden=!open; xt.setAttribute('aria-expanded',String(open));
+    xt.textContent=open?'✛ Hide the mechanism — return to the phone'
+                       :'✛ Reveal the mechanism — 20s cap, the only x-ray in the run';
+  }
+
+  /* ---------- stage frames ---------- */
+  var frames=stagev.querySelectorAll('.sframe'), sIdx=0, nav=$('snav');
+  frames.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.className='sdot'; d.type='button';
+    d.setAttribute('aria-label','Frame '+(i+1));
+    d.addEventListener('click',function(){showFrame(i);});
+    nav.appendChild(d);
+  });
+  function showFrame(i){
+    sIdx=Math.max(0,Math.min(frames.length-1,i));
+    frames.forEach(function(f,j){f.classList.toggle('on',j===sIdx);});
+    nav.querySelectorAll('.sdot').forEach(function(d,j){
+      d.setAttribute('aria-current',String(j===sIdx));
+    });
+  }
+
+  /* ---------- wiring ---------- */
+  map.onclick=function(){setMode('map');};
+  run.onclick=function(){setMode('run');};
+  stageBtn.onclick=function(){setMode('stage');};
+  xt.onclick=function(){setXray(xr.hidden);};
+  $('tStart').onclick=function(){
+    if(ticking){
+      ticking=false; pausedAt=performance.now();
+      cancelAnimationFrame(raf); $('tStart').textContent='Resume';
+    } else if(idx>=0){
+      // shift both clocks forward by the paused duration, so a pause costs
+      // neither the beat nor the total. Getting this wrong makes the whole
+      // instrument lie, and the timings are the only thing it is for.
+      var gap=performance.now()-pausedAt;
+      t0+=gap; segT0+=gap;
+      ticking=true; $('tStart').textContent='Pause'; raf=requestAnimationFrame(tick);
+    } else startRun();
+  };
+  $('tNext').onclick=nextBeat;
+  $('tReset').onclick=resetRun;
+  $('tCut').onclick=function(){ prof=(prof==='wide'?'tight':'wide'); paintClock(); resetRun(); };
+
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var tag=(e.target.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='textarea') return;
+    var k=e.key.toLowerCase(), inStage=stagev.classList.contains('show');
+
+    if(inStage){
+      if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();showFrame(sIdx+1);return;}
+      if(e.key==='ArrowLeft'){e.preventDefault();showFrame(sIdx-1);return;}
+      if(e.key==='Escape'){setMode('map');return;}
+    }
+    if(k==='s'){ setMode(inStage?'map':'stage'); return; }
+    if(k==='m'){ setMode(b.classList.contains('run')?'map':'run'); return; }
+    if(k==='d'){ drills.classList.toggle('show'); return; }
+    if(k==='x'){ if(!b.classList.contains('run')) setMode('run'); setXray(xr.hidden); return; }
+    if(b.classList.contains('run')){
+      if(e.key===' '){ e.preventDefault(); $('tStart').click(); }
+      if(e.key==='ArrowRight'||e.key==='Enter'){ e.preventDefault(); nextBeat(); }
+    }
+  });
+
+  paintClock(); resetRun(); setMode('map'); showFrame(0);
+})();
+</script>
